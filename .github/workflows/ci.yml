@@ -1,14 +1,143 @@
-name: CI
-
+name: ci
 on:
-  push:
-    branches: [ "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [main]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
 
 jobs:
-  bootstrap:
+  # ---------- always-on gates (run on every PR, no code needed) ----------
+
+  docs-sanity:
     runs-on: ubuntu-latest
     steps:
-    - name: Docs Sanity Check
-      run: echo "Repo live, branch protection + CI enforced, planning pack committed"
+      - uses: actions/checkout@v4
+      - name: Required docs exist
+        run: |
+          test -f docs/MASTER.md || (echo "docs/MASTER.md missing" && exit 1)
+          test -f docs/01-prd.md || (echo "docs/01-prd.md missing" && exit 1)
+          test -f docs/06-engineering-rules.md || (echo "docs/06-engineering-rules.md missing" && exit 1)
+      - name: Docs cap (11, one-in-one-out)
+        run: |
+          n=$(git ls-files 'docs/*.md' | wc -l)
+          echo "docs/ contains $n files (cap: 11)"
+          test "$n" -le 11 || (echo "FAIL: docs/ over cap — merge or remove a doc first" && exit 1)
+
+  placement:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: File-placement law
+        run: bash scripts/check-file-placement.sh
+
+  secrets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  # ---------- code gates (auto-skip until Week 1 Day 3 scaffold lands) ----------
+
+  changes:
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.f.outputs.code }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: f
+        with:
+          filters: |
+            code:
+              - 'web/**'
+              - 'api/**'
+              - 'packages/**'
+              - 'prisma/**'
+              - 'package.json'
+              - 'pnpm-*.yaml'
+              - 'tsconfig*.json'
+
+  lint:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: ESLint
+        run: |
+          if [ -f eslint.config.js ] || [ -f .eslintrc.cjs ]; then
+            pnpm lint
+          else
+            echo "eslint config lands Week 1 Day 3 — skipping until then"
+          fi
+
+  typecheck:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: TypeScript
+        run: |
+          if ls tsconfig*.json >/dev/null 2>&1 || ls */tsconfig*.json >/dev/null 2>&1; then
+            pnpm typecheck
+          else
+            echo "tsconfig lands Week 1 Day 3 — skipping until then"
+          fi
+
+  test:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Unit tests
+        run: |
+          if git ls-files '*.test.ts' '*.test.tsx' | grep -q .; then
+            pnpm test
+          else
+            echo "no test files yet — first ones land with payments logic (Week 5-6)"
+          fi
+
+  boundaries:
+    needs: changes
+    if: needs.changes.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Module boundaries (dependency-cruiser)
+        run: |
+          if [ -f .dependency-cruiser.cjs ]; then
+            pnpm boundaries
+          else
+            echo "dependency-cruiser config lands Week 1 Day 3 — skipping until then"
+          fi
