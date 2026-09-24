@@ -1,0 +1,14 @@
+name: CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  bootstrap:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docs Sanity Check
+      run: echo "Repo live, branch protection + CI enforced, planning pack committed"

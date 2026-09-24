@@ -1,0 +1,19 @@
+# 06 — Engineering Rules & Standards v2.0 FINAL
+*v1.0 unchanged; v2.0 additions marked [NEW]. CI enforces what it can; review enforces the rest.*
+
+## 1. Repo — v1.0 (monorepo: /web /api /packages/shared-types /packages/auth **[NEW: + /packages/analytics]** /docs /prisma; path-based CI)
+## 2. Git & PRs — v1.0 (conventional commits; PR = What/Why/How-tested; no direct main pushes)
+## 3. Code standards — v1.0 (strict TS; modules/{routes,controller,service,repository}; zod at boundaries; pino; paise; UTC)
+## 4. Security baseline — v1.0 (rate limits day-1; helmet; CORS allowlist; bcrypt(12); webhook sig verify; npm audit in CI)
+**[NEW] tokenVersion revocation:** Redis key `tv:{uid}` TTL ≤60s; every bump deletes the key in the same
+operation; shared verifySession() in /packages/auth is the ONLY session-verification path (lint-enforced:
+no direct jose usage in app code).
+## 5. Testing — v1.0 + **[NEW] mandatory unit tests:** parental-consent token lifecycle (issue/verify/expiry/
+replay/single-use), minor-gating middleware matrix (PENDING vs VERIFIED × learn/checkout/live), track() no-op for minors.
+## 6. DoD — v1.0 (gate + CI green + runbooks + Friday update + achievement log)
+## 7. Environments & data — v1.0 + **[NEW] no production PII in staging seeds; consent rows never seeded with real identities**
+## 8. Runbooks — v1.0 + **[NEW] minors-data-request (parent deletion/export handling)**
+## 9. Never-do list — v1.0 (9 items) + **[NEW] never accept isMinor/consentState from clients (server-derived only);
+never fire analytics outside track(); never store parent verification tokens unhashed-at-rest beyond their 48h life
+(tokens hashed in DB, plaintext only in the emailed link)**
+## 10. Scope freeze & change control — v1.0 verbatim (3 legitimate breaks; v2 backlog default; 24h written impact replies)
