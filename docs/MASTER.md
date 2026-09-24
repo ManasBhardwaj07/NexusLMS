@@ -13,7 +13,7 @@ Compiled 23 Sep 2026 · Personas A (Senior Staff Architect) + B (SDE-3) · Sourc
 | `00-kickoff-status.md` | One-page status: locked / pending / founder-dependent / day-1 checklist / legal | ✅ 🟡+🔴 sections |
 | `01-prd.md` | Product requirements: scope, user stories, NFRs, launch gates | ✅ §7 open decisions |
 | `02-architecture-trd.md` | Systems design: topology, auth, payments, video, live, minors data-flow | (decision notes only) |
-| `03-database.md` + schema in `prisma/` | Full data model + migration rules + seed plan | ❌ |
+| `prisma/schema.prisma` + `prisma/schema-notes.md` | Full data model + migration rules + seed plan | ❌ |
 | `04-api-contract.md` | Every endpoint, auth, idempotency, error codes | ❌ |
 | `05-uiux-spec.md` | Pages, components, states, tokens, minors screens | ✅ palette decision |
 | `06-engineering-rules.md` | Code/git/test/security/freeze rules | ❌ |
