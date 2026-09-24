@@ -35,7 +35,7 @@
 - [ ] Toolchain: Node LTS, pnpm, Docker Desktop, GitHub CLI
 - [ ] Org accounts (free tiers; founder = billing owner, you = member): Neon, Upstash, Vercel, Render, Cloudflare, Sentry
 - [ ] Google Cloud OAuth client (dev) · Resend test-domain sending verified
-- [ ] Execute `10-changelog-and-launch.md` Week-1 task list only
+- [ ] Execute `10-launch-checklist.md` Week-1 task list only
 
 ## ⚖️ LEGAL — DAY-1 (founder's plate; your job is forcing the questions)
 1. **Entity:** offer letter says "QAVYRN" — registered or not? If not, KYC runs as founder's sole proprietorship

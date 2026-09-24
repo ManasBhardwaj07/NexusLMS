@@ -10,17 +10,17 @@ Compiled 23 Sep 2026 · Personas A (Senior Staff Architect) + B (SDE-3) · Sourc
 | File | Contains | Has founder items? |
 | --- | --- | --- |
 | **THIS FILE (MASTER.md)** | Everything, condensed + the Founder Pack | ✅ §3 |
-| `00-kickoff-status.md` | One-page status: locked / pending / founder-dependent / day-1 checklist / legal | ✅ 🟡+🔴 sections |
+| `00-kickoff-status.md` | One-page status: locked / pending / founder-dependent / day-1 checklist / legal + achievement log | ✅ 🟡+🔴 sections |
 | `01-prd.md` | Product requirements: scope, user stories, NFRs, launch gates | ✅ §7 open decisions |
 | `02-architecture-trd.md` | Systems design: topology, auth, payments, video, live, minors data-flow | (decision notes only) |
-| `prisma/schema.prisma` + `prisma/schema-notes.md` | Full data model + migration rules + seed plan | ❌ |
 | `04-api-contract.md` | Every endpoint, auth, idempotency, error codes | ❌ |
 | `05-uiux-spec.md` | Pages, components, states, tokens, minors screens | ✅ palette decision |
-| `06-engineering-rules.md` | Code/git/test/security/freeze rules | ❌ |
+| `06-engineering-rules.md` | Code/git/test/security/freeze/placement rules (living doc) | ❌ |
 | `07-execution-plan.md` | Week 1–14 plan, gates, buffer accounting | ✅ founder-dependency column |
 | `08-razorpay-kyc-guide.md` | KYC walkthrough (founder executes, you drive) | ✅ entirely founder-executed |
-| `09-blind-spot-review.md` | Gap record + external reviewer checklist | ❌ |
-| `10-changelog-and-launch.md` | Changelog, top risks, FINAL Wk1+Wk2 task lists | (risks reference founder) |
+| `09-blind-spot-review.md` | Part B: external reviewer checklist (live Phase 7 gate) | ❌ |
+| `10-launch-checklist.md` | FINAL Wk1+Wk2 day-by-day task lists (risks in MASTER §12; changelog = git log) | (risks reference founder) |
+| *(prisma/)* `schema.prisma` + `schema-notes.md` | Full data model + migration rules + seed plan | ❌ |
 | *(external)* Decision Audit v1.1, Appendix A1/A2 | Rationale record + the two founder message drafts | ✅ the actual message texts |
 
 **Founder Pack shortcut: everything you must raise with Suryansh is in §3 below — nothing founder-facing lives only in another file.**
