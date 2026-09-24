@@ -22,7 +22,8 @@ never fire analytics outside track(); never store parent verification tokens unh
 Rules must grow with every feature, or they die.
 - **PR Rules Delta:** Every feature/fix PR must include a "Rules" section answering: what new invariant does this code create? Add it to this file or the PR template Step 0 checklist (or justify none).
 - **Runbooks:** Every new integration (3rd-party SDK, provider) must add a short runbook stub in `docs/runbooks/`.
-- **Quarterly Audit:** Run the readiness audit checklist quarterly or at Phase 7 (checklist: `09-blind-spot-review.md` Part B).
+- **Quarterly Audit:** Run `/skills/product-readiness-audit/SKILL.md` (checklist mirror: `09-blind-spot-review.md` Part B) quarterly or at Phase 7.
+- **Skills Cap Rule:** `skills/` holds only skills invoked by a gate or phase (current: 1). A new skill requires naming the gate that invokes it.
 - **Placement Law:** Executable artifacts (schema, configs, workflows) live in functional folders (`prisma/`, `.github/`, `web/`, `api/`, `packages/`); `docs/` holds prose/decisions/plans ONLY and never duplicates code. Root = prose/config max 3 (`README.md`, `.gitignore`, `.editorconfig`) + functional workspace dirs.
 - **Git Status:** `git status` must be clean before any PR.
 - **Folder README rule:** A folder gets a README only if it explains something not covered by the root README or the docs pack. Empty skeleton folders never get READMEs. If a folder's contents become self-explanatory, the README gets deleted, not updated forever.
