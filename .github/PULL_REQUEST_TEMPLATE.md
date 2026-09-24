@@ -2,7 +2,7 @@
 <!-- All items below are mandatory — see docs/06-engineering-rules.md §11 for the rule set. -->
 
 **Mandatory for ALL PRs:**
-- [ ] **Scope check:** Inside v1 freeze? If not: v2 backlog or written founder timeline re-quote.
+- [ ] **Scope check:** Inside v1 freeze? If not: v2 backlog or written timeline re-quote.
 - [ ] **Secrets scan:** No `.env`, keys, tokens, or PII in `git diff`.
 - [ ] **Achievement-log:** One line added to `## Achievement Log` in `docs/00-kickoff-status.md`.
 
@@ -30,4 +30,4 @@
 <!-- What new invariant does this code create? Did you add it to docs/06-engineering-rules.md? If none, justify why. -->
 
 ## Achievement-log line
-<!-- dated, factual — feeds the Friday founder update in docs/00-kickoff-status.md -->
+<!-- dated, factual — feeds the Friday progress update in docs/00-kickoff-status.md -->

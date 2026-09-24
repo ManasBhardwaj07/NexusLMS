@@ -7,24 +7,21 @@ Compiled 23 Sep 2026 · Personas A (Senior Staff Architect) + B (SDE-3) · Sourc
 
 ## PART 0 — WHAT EACH FILE CONTAINS (the map)
 
-| File | Contains | Has founder items? |
+| File | Contains | Has external items? |
 | --- | --- | --- |
-| **THIS FILE (MASTER.md)** | Everything, condensed + the Founder Pack | ✅ §3 |
-| `00-kickoff-status.md` | One-page status: locked / pending / founder-dependent / day-1 checklist / legal + achievement log | ✅ 🟡+🔴 sections |
+| **THIS FILE (MASTER.md)** | Everything, condensed + External Dependencies | ✅ §3 |
+| `00-kickoff-status.md` | One-page status: locked / pending / external dependencies / day-1 checklist / legal + achievement log | ✅ 🟡+🔴 sections |
 | `01-prd.md` | Product requirements: scope, user stories, NFRs, launch gates | ✅ §7 open decisions |
 | `02-architecture-trd.md` | Systems design: topology, auth, payments, video, live, minors data-flow | (decision notes only) |
 | `04-api-contract.md` | Every endpoint, auth, idempotency, error codes | ❌ |
 | `05-uiux-spec.md` | Pages, components, states, tokens, minors screens | ✅ palette decision |
 | `06-engineering-rules.md` | Code/git/test/security/freeze/placement rules (living doc) | ❌ |
-| `07-execution-plan.md` | Week 1–14 plan, gates, buffer accounting | ✅ founder-dependency column |
-| `08-razorpay-kyc-guide.md` | KYC walkthrough (founder executes, you drive) | ✅ entirely founder-executed |
+| `07-execution-plan.md` | Week 1–14 plan, gates, buffer accounting | ✅ external dependency column |
 | `09-blind-spot-review.md` | Part B: external reviewer checklist (live Phase 7 gate) | ❌ |
-| `10-launch-checklist.md` | FINAL Wk1+Wk2 day-by-day task lists (risks in MASTER §12; changelog = git log) | (risks reference founder) |
+| `10-launch-checklist.md` | FINAL Wk1+Wk2 day-by-day task lists (risks in MASTER §12; changelog = git log) | (risks reference external items) |
 | *(prisma/)* `schema.prisma` + `schema-notes.md` | Full data model + migration rules + seed plan | ❌ |
 | *(skills/)* `product-readiness-audit/SKILL.md` | Phase-7 product readiness audit runbook & checklist mirror (09 Part B) | ❌ |
-| *(external)* Decision Audit v1.1, Appendix A1/A2 | Rationale record + the two founder message drafts | ✅ the actual message texts |
-
-**Founder Pack shortcut: everything you must raise with Suryansh is in §3 below — nothing founder-facing lives only in another file.**
+| *(external)* Decision Audit v1.1 | Architectural rationale record | ❌ |
 
 ---
 
@@ -42,7 +39,7 @@ Success = first cohort runs end-to-end + real payments flow with monitoring — 
 
 1. **Stack:** Next.js 14 App Router · Express (not NestJS) · Neon Postgres + Prisma · Upstash Redis + BullMQ ·
 Vercel (web) + Render (API + worker) · Cloudflare Stream · Razorpay · Resend · Sentry. Monorepo, pnpm workspaces.
-2. **Timeline:** 70 working days / 14 weeks (63 build + 7 buffer). Founder rejecting YouTube-Live scope → 16 weeks.
+2. **Timeline:** 70 working days / 14 weeks (63 build + 7 buffer). Scope rejection of YouTube-Live → 16 weeks.
 3. **Live v1:** unlisted YouTube Live, rotated dashboard-gated links (never emailed raw), manual same-day VOD ingest.
 v1.1 SDK (100ms vs Cloudflare RealtimeKit spike at Wk9) after cohort 1.
 4. **Auth:** one NextAuth JWT (JWE, 15-min sliding) `{uid, role, tv}`; shared `jose` verifySession() used by BOTH
@@ -59,64 +56,31 @@ parallel revenue via the SAME verified path.
 8. **Minors (DPDP §9) — IN v1 scope:** DOB required at signup · under-18 gated until verifiable parental consent
 (email/phone token, 48h, single-use, hashed at rest, IP/UA evidence) · analytics permanently OFF for minors via
 single `track()` wrapper · data export/delete path for all users.
-9. **Infra topology:** Vercel → Render (API+worker) → Neon; Upstash; Cloudflare (Stream/R2/DNS); founder = billing
-owner of all accounts, you = member.
-10. **Legal posture:** entity question forced Wk1 · GST + refund policy + minors posture = ONE founder conversation Wk2 ·
-legal page text + invoice format = founder, Wk12 hard blocker.
+9. **Infra topology:** Vercel → Render (API+worker) → Neon; Upstash; Cloudflare (Stream/R2/DNS); organization-owned
+accounts with separation of billing and member roles.
+10. **Legal posture:** entity resolution Wk1 · GST + refund policy + minors posture decided Wk2 · legal page text + invoice format sign-off Wk12 hard blocker.
 
 ---
 
-## PART 3 — 🎯 THE FOUNDER PACK (everything to raise with Suryansh, in one place)
+## PART 3 — 🎯 EXTERNAL DEPENDENCIES
 
-*Send items 1–4 today. Item 5 is a Wk2 meeting. Each: what → why → due → cost of being late → your ask.*
+| Item | Needed By | Impact if Late |
+|---|---|---|
+| **Razorpay account & approved KYC** | Wk1 (submission), Wk6 (approval) | Live-Mode cutover (Wk13) slips 1:1; blocks production revenue |
+| **Domain & Cloudflare DNS access** | Wk1 | Email auth (SPF/DKIM/DMARC), warm-up, and SEO blocked |
+| **YouTube brand channel live-enabled** | Wk1–2 | 24h activation delay risks Phase 5 (Wk9) dry-run failure |
+| **Business entity status resolution** | Wk1 | Determines KYC business type and contract/tax structure |
+| **GST policy, refund rules & minor posture** | Wk2 | Checkout fields and consent flows built twice if late |
+| **Course content (~80h video & syllabus)** | Wk4 | Placeholder seed required; real-content QA and launch slip |
 
-**F-1. Razorpay account + KYC submission — DUE Wk1 (this week)**
-What: he creates the business account and submits KYC (guide: `08`). First decide business type: if QAVYRN isn't
-registered, fastest legitimate route = sole proprietorship (his PAN; Udyam registration is free business proof) —
-but that means personal liability, so it's his informed call, ideally CA-checked. Collect docs FIRST (PAN, address
-proof, bank+cheque, website URL, honest low volume), apply once. Why: Live-Mode is impossible without approval;
-Test Mode is fine for all dev. Late by X → Live cutover (Wk13) slips 1:1. Your ask: proof of submission by Friday.
-**Hard rules: HE is the account owner/KYC applicant — you join as team member after approval, never before.**
-08-kyc-guide is founder-ops documentation: archive it from the repo the day KYC is approved (TTL'd, not permanent).
+*Policy & Confirmation Items:*
+- Brand palette (blocks UI tokens Wk1)
+- Video player watermark confirmation (email overlay)
+- Launch course pricing (required before Phase 3 test data)
+- Legal page copy (Terms, Privacy, Refund) & invoice format (Wk12 hard launch blocker)
+- Mentor confirmed for dry-run class (Wk9 gate)
 
-**F-2. Entity question — DUE Wk1**
-What: is QAVYRN a registered entity? If yes, certificate please (needed for KYC + your employment record). If no,
-say so plainly — the KYC path (F-1) and your contract status depend on it. Why: the offer letter names "QAVYRN" as
-legal/registered name; verification is due diligence, not distrust. Your ask: written answer + certificate if registered.
-
-**F-3. Domain + Cloudflare + DNS — DUE Wk1**
-What: buy the CodeAscend domain (his card, his account), add you on Cloudflare with edit access. Same for a Google/
-YouTube brand channel with **live streaming enabled this week** (new channels need verification + ~24h activation —
-a silent Wk9 killer if left late). Why: email authentication (SPF/DKIM/DMARC), warm-up, SEO, thumbnails all need DNS live.
-Your ask: domain live + CF access + YouTube live-enabled, all by Friday.
-
-**F-4. Two written approvals — DUE Wk1** (message texts already drafted: Audit Appendix A1 + A2)
-(a) **Timeline:** 14 weeks milestone-framed (A2) — he'll SEE payments working by Wk6 and a live platform by Wk13.
-(b) **Live-class scope change** (A1): cohort 1 = YouTube Live + same-day manual recordings; full in-app classroom
-SDK in v1.1 after cohort 1. If he rejects → +9 days, 16 weeks — his call, but in writing.
-
-**F-5. The Wk2 three-in-one decisions meeting — DUE Wk2** (one conversation, one written record)
-(a) **GST treatment:** recorded online courses are taxable services; which SAC code, is the business GST-registered,
-what goes on the invoice? Needs his CA, not guesswork. Blocks checkout fields + Live-Mode legality.
-(b) **Refund policy:** immediate access-revocation on refund, or grace period? Drives Phase 6 build (Wk10) — the
-DECISION must land now because GST credit-note mechanics depend on it.
-(c) **Minor-user posture:** audience is 16–18 → DPDP §9 requires verifiable parental consent (we're building it) and
-bans tracking minors. Open legal question for his CA: minors generally can't be bound by contract — should the
-purchaser-of-record on a minor's enrollment be the parent? If yes, checkout gains a parent-confirmation step
-(migration 0003, ~1–2 days — buffer absorbs it).
-Late by >1 week on F-5 → consent + checkout fields get built twice.
-
-**F-6. Content + people + legal text — DUE Wk4 / Wk9 / Wk12**
-Course content (~80h video + syllabus) by Wk4 (placeholders let dev continue, but real-content QA slips if late) ·
-a mentor confirmed for the Wk9 dry-run class · final legal page text (Terms/Refund/Privacy — his content, your page
-shells) + invoice format sign-off by Wk12 = **hard launch blocker**.
-
-**F-7. Small confirmations — any time this week:** brand palette (CodeAscend navy/gold vs QAVYRN — blocks UI tokens) ·
-visible watermark with the student's email on the video player (anti-piracy deterrent — confirm he's fine showing it) ·
-course pricing for the two launch courses (needed for Phase 3 test data).
-
-*Founder-update discipline: every Friday, written — what shipped (demo-able), what's blocked on him (from this pack),
-what's next. That trail is your escalation evidence AND your month-3 compensation evidence.*
+*Progress update discipline: every Friday, written — what shipped (demo-able), what external dependencies are blocking, what is next.*
 
 ---
 
@@ -167,7 +131,7 @@ sends from Wk3.
 **Scaling hooks:** 100 students = UX bugs not infra · 1k = paid tiers + 2nd dyno (budgeted) · 10k = Stream delivery
 ~$2k/mo + progress write pressure → 60s batching + read replica. None change v1 architecture.
 **Known v1 limitations (documented, deliberate):** YouTube Live trade-offs · manual ingest · no DRM (signed URLs +
-watermark; screen-recording unstoppable at this tier — founder informed) · minors = no analytics by law.
+watermark; screen-recording unstoppable at this tier — known tradeoff) · minors = no analytics by law.
 
 ---
 
@@ -214,7 +178,7 @@ Mobile-web-first, 360px base; SSR catalog; every page has loading/empty/error; a
 **v2.0 screens:** signup w/ DOB picker + consent checkbox · consent-pending screen (browse OK, resend parent link) ·
 parent verification page (single-use token; expired/used → re-request) · minors "tracking disabled" note in settings ·
 checkout parent-confirmation variant (pending Wk2) · settings: consent status, export, delete (parent-verified for minors).
-Tokens: semantic color slots (palette pending founder) · Inter · 4pt grid · dark mode NOT v1.
+Tokens: semantic color slots (palette decision pending) · Inter · 4pt grid · dark mode NOT v1.
 Analytics: GA4 events only via single `track()` = trackingConsent && !isMinor.
 
 ---
@@ -231,7 +195,7 @@ minors-data-request, db-restore-drill) · **never:** secrets in repo · client-s
 callback alone · raw live links in email · raw video files · payment amount edits · admin mutation without audit row ·
 isMinor/consent from clients · analytics outside track() · breaking the freeze quietly.
 **Freeze:** v1 = PRD scope. Breaks only for: legal/compliance requirement, security fix with no smaller mitigation,
-or founder re-quotes timeline in writing. Scope asks → v2 backlog + 24h written impact reply, never silently absorbed.
+or formal timeline re-quote in writing. Scope asks → v2 backlog + 24h written impact reply, never silently absorbed.
 
 ---
 
@@ -239,7 +203,7 @@ or founder re-quotes timeline in writing. Scope asks → v2 backlog + 24h writte
 
 70 working days = 63 build + 7 buffer, 14 weeks. (Phase 1 grew 6→8 for minors feature; buffer 9→7.)
 
-| Wk | Build | Gate | Founder due (late → impact) |
+| Wk | Build | Gate | External dependency (late → impact) |
 | --- | --- | --- | --- |
 | 1 | Repo/CI/Neon/Upstash/Prisma v2.0 schema/Sentry | boots 1 cmd, CI green, migration clean | KYC submitted · domain+CF+DNS · YouTube live-enabled · entity answer (KYC late 1wk → Live cutover slips 1:1) |
 | 2 | Auth spike D1–3 (Clerk fallback D3) → auth + DOB + minors gating + consent flow | signup×2, guards, rate limits, consent tests green | **Wk2 three-in-one: GST + refund + minors posture** (late >1wk → built twice) |
@@ -252,36 +216,35 @@ or founder re-quotes timeline in writing. Scope asks → v2 backlog + 24h writte
 | 13 | Prod deploy, domain, Live-Mode cutover, monitoring | real purchase on prod; monitors alert | DNS (since Wk1) |
 | 14 | Buffer (5d) + 2 floating | — | pre-spent buffer = red flag |
 
-Cadence: build Mon–Fri vs current row · daily 3-line private log · Friday written founder update · dated achievement
+Cadence: build Mon–Fri vs current row · daily 3-line private log · Friday written progress update · dated achievement
 log. Gates: no phase starts until prior gate passes; P0 security fix may interrupt any phase. Escalation verbatim:
 dependency >5d late → same-day written log + re-quote + continue unaffected tracks · payment test failure → stop
 Phase 3 until root-caused · scope request → v2 default, written delta before acceptance.
 
 ---
 
-## PART 11 — KYC ESSENTIALS (condensed; full guide `08-`)
+## PART 11 — KYC & PAYMENT GATEWAY ESSENTIALS
 
 Test Mode = instant, no KYC, all dev happens there. Live Mode needs KYC approval (2–7 working days, resubmissions
-cost days). Step 0: business type — unregistered QAVYRN → founder as sole proprietor (his PAN; Udyam = free business
-proof; personal liability = his informed CA-checked call). Collect first, apply once: PAN, address proof, bank +
-cheque, website URL, phone/email, honest low volume. Rejection causes: name mismatch, blur, address mismatch,
-unreachable site, inflated volume. On approval: Live keys → Render prod secrets only; you added as team member after.
-Track status every 2 days. Not submitted end-Wk1 → written flag; not approved end-Wk6 → cutover slips 1:1.
+cost days). Business type determination (registered entity vs sole proprietorship) sets documentation requirements.
+Prerequisites: PAN, address proof, bank + cancelled cheque, website URL, phone/email, low volume profile.
+Common rejection causes: name mismatch, blur, address mismatch, unreachable website URL, inflated volume profile.
+On approval: Live API keys → Render prod environment variables only; role-based access for development team.
+Track status every 2 days. Submission required by end-Wk1; approval required by end-Wk6 or cutover slips 1:1.
 
 ---
 
 ## PART 12 — RISKS & THE FINALIZED TASKS
 
-**Top risks:** A: (1) Wk2 conversation slips, (2) KYC rejection loop eating Wk1–6, (3) track()-wrapper discipline
+**Top risks:** A: (1) Wk2 policy decisions slip, (2) KYC rejection loop eating Wk1–6, (3) track()-wrapper discipline
 eroding mid-project. B: (1) auth spike failing slowly not fast — honor Day-3 Clerk trigger, (2) content "almost ready"
 at Wk4 starving the Phase 7 real-video QA, (3) scope creep as a pile of "small asks."
-**Week 1 (finalized):** D1 org+repo+2FA+protection, pack to /docs, send F-1..F-4 messages · D2 toolchain + accounts
-
-- OAuth client + Resend test · D3 monorepo scaffold + CI · D4 full schema + migration + Neon branch proof · D5 Sentry
-- /health + env convention + gate check + Friday update.
+**Week 1 (finalized):** D1 org+repo+2FA+protection, pack to /docs, trigger external dependencies · D2 toolchain + accounts
++ OAuth client + Resend test · D3 monorepo scaffold + CI · D4 full schema + migration + Neon branch proof · D5 Sentry
++ /health + env convention + gate check + Friday progress update.
 **Week 2 (finalized):** D1–3 auth spike (go/no-go D3 → Clerk) · D4 DOB signup + isMinor + consentState + consent
 checkbox + rate limiter + email verification · D5 parental-consent endpoints + parent email template + gating +
-consent unit tests + **hold Wk2 three-in-one meeting, written record** + gate + Friday update.
+consent unit tests + **record Wk2 policy decisions** + gate + Friday progress update.
 **Everything after Wk2 stays gated per PART 10 — no further task lists finalize until each week's gate passes.**
 
 ---

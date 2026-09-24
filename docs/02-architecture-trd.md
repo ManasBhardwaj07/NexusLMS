@@ -69,4 +69,4 @@ pino logs with request-id; Razorpay ids logged, secrets never; PITR before Live-
 
 ## 11. Scaling hooks & known v1 limitations — unchanged from v1.0
 (limitations: YouTube Live trade-offs, manual ingest, no DRM — signed URLs + watermark only, expectation
-documented with founder; minors = no analytics by law, not by choice).
+documented as product baseline; minors = no analytics by law, not by choice).
