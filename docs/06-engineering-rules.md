@@ -20,6 +20,11 @@ never fire analytics outside track(); never store parent verification tokens unh
 
 ## 11. Living Rules Protocol [NEW]
 Rules must grow with every feature, or they die.
-- **PR Rules Delta:** Every feature/fix PR must include a "Rules" section answering: what new invariant does this code create? Add it to this file or `pr-rules.md` (or justify none).
+- **PR Rules Delta:** Every feature/fix PR must include a "Rules" section answering: what new invariant does this code create? Add it to this file or the PR template Step 0 checklist (or justify none).
 - **Runbooks:** Every new integration (3rd-party SDK, provider) must add a short runbook stub in `docs/runbooks/`.
 - **Quarterly Audit:** Run `/skills/product-readiness-audit` against the whole platform quarterly (or at Phase 7).
+- **Placement Law:** Executable artifacts (schema, configs, workflows, skills) live in functional folders (`prisma/`, `.github/`, `skills/`, `web/`, `api/`, `packages/`); `docs/` holds prose/decisions/plans ONLY and never duplicates code. One README per directory with distinct purpose. Root max 6 entries.
+- **Git Status:** `git status` must be clean before any PR.
+- **Folder README rule:** A folder gets a README only if it explains something not covered by the root README or the docs pack. Empty skeleton folders never get READMEs. If a folder's contents become self-explanatory or its explanation moves into code/docs, the README gets deleted, not updated forever.
+- **Pointer-file rule:** A pointer file (a `.md` whose only purpose is linking to another file) must stay under ~10 lines. If it grows past that, it has become a second source of truth that can drift — treat any oversized pointer file as a bug; merge its content into the target file instead.
+- **`.gitkeep` expiry:** A `.gitkeep`-only folder is acceptable only *before* that folder's phase has started. Past the phase gate, an empty skeleton is a missing-work signal — don't let it sit unquestioned.

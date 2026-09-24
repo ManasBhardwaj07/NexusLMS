@@ -24,13 +24,13 @@ codeascend-platform/
 │   ├── auth/.gitkeep            Session-verify package lands Week 2
 │   └── analytics/.gitkeep       track() wrapper lands Week 2
 └── prisma/
-    └── README.md                Schema lands Day 4 per docs/03
+    └── README.md                Schema lands Day 4 per docs/03-database.md
 
 ## 2. Safety & compliance check (verified against the locked decisions)
 | Check | Result |
 |---|---|
 | Secrets/keys in repo | NONE — scanned; `.env*` hard-blocked by .gitignore |
-| Money-as-float anywhere | N/A — no code yet; schema (docs/03) uses integer paise |
+| Money-as-float anywhere | N/A — no code yet; schema (docs/03-database.md) uses integer paise |
 | CI status | Green by design (bootstrap) — real lint/typecheck/test land Day 3 per plan |
 | Naming | Matches locked decisions: web/api/packages/prisma monorepo, codeascend-platform repo name |
 | Docs ↔ decisions traceable | MASTER Part 2 lists the 10 locked decisions; each detailed doc implements them (see §4) |
@@ -41,7 +41,7 @@ codeascend-platform/
 - .env, .env.*, any secret (Razorpay keys, JWT secret, DB URLs) — platform secret stores only
 - node_modules/, build output (.next/, dist/, coverage/) — gitignored, but never force-add
 - Offer letter, your resume, Decision Audit v1.1 (contains comp/risk context) — private archive, not repo
-- Real user PII, real consent data, real identities in seeds — seed data is synthetic only (docs/03 notes)
+- Real user PII, real consent data, real identities in seeds — seed data is synthetic only (prisma/schema-notes.md)
 - Course videos/PDFs — Stream/R2 only; git is for code, never content
 
 ## 4. Traceability: repo artifact → locked decision
@@ -67,6 +67,6 @@ codeascend-platform/
 
 ## 7. What is deliberately ABSENT right now (and when it lands)
 No package.json, no app code, no Prisma schema file in-repo — by design. Week 1 is execution-gated:
-scaffold Day 3, schema Day 4 (from docs/03), Sentry/env Day 5. Committing half-finished scaffold before
+scaffold Day 3, schema Day 4 (from docs/03-database.md), Sentry/env Day 5. Committing half-finished scaffold before
 the gate would violate the plan's own discipline. The repo being "docs + skeleton + green CI" IS the
 correct Day-1 state.
