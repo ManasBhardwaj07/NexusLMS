@@ -1,7 +1,7 @@
 # 05 — UI/UX Specification v2.0 FINAL
 
 ## 1. Principles — v1.0 unchanged (mobile-web-first, SSR catalog, explicit states, accessibility)
-## 2. Tokens — v1.0 unchanged; palette still PENDING founder Wk1 (semantic slots make it a 1-file swap)
+## 2. Tokens — v1.0 unchanged; palette decision pending Wk1 (semantic slots make it a 1-file swap)
 ## 3. v2.0 additions (minors / DPDP)
 | Screen | States & rules |
 |---|---|

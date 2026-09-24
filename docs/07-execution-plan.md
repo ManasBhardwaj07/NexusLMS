@@ -1,15 +1,15 @@
 # 07 — Master Execution Plan v2.0 FINAL — Week 1–14 (solo dev)
 
 Estimate: 63 build days + 7 buffer days = **70 working days / 14 weeks** (v2.0: Phase 1 grew 6→8 days for
-DOB capture + parental-consent flow per DELTA-1; buffer shrank 9→7). Founder rejection of the YouTube-Live
-scope change → +9 days → 16 weeks (his written call).
+DOB capture + parental-consent flow per DELTA-1; buffer shrank 9→7). Scope change rejection (full in-app SDK)
+→ +9 days → 16 weeks.
 
-| Wk | Focus | Visible to founder by end | Gate (binary) | Founder dep due (late by X → Y) |
+| Wk | Focus | Milestone / Output | Gate (binary) | External dependency (late by X → Y) |
 |---|---|---|---|---|
 | 1 | Phase 0: repo/CI/Neon+Upstash/Prisma v2.0 schema+migration/Sentry | Nothing visible — infra only; KYC in motion | Boots in 1 cmd; CI green; migration clean | **KYC submitted · domain+CF+DNS · YouTube live-enabled · entity answer** (KYC late 1wk → Live cutover slips 1:1) |
 | 2 | Auth spike D1–3 (Clerk fallback D3) → auth build + **DOB + minors gating + parental-consent flow** | Can sign up (both methods); minor test account shows consent flow | Signup×2, guards 401/403, rate limits, **consent token lifecycle tests green** | **Wk2 three-in-one: GST + refund policy + minors posture** (late >1wk → checkout/consent built twice) |
 | 3–4 | Phase 2: CMS, Stream upload, catalog, detail, SEO, seed both courses | Both courses browsable; preview plays logged-out | Search/filter/preview/block-by-direct-URL pass | **Course content** (late → placeholders; QA+launch slip) |
-| 3–4 ∥ | Payment-Links ingest endpoint; founder issues links manually | **First real revenue possible** | Link purchase → same verified txn path | founder action |
+| 3–4 ∥ | Payment-Links ingest endpoint; manual link issuance | **First real revenue possible** | Link purchase → same verified txn path | External link distribution |
 | 5–6 | Phase 3: Razorpay order/verify/webhook/refund/expiry | Embedded checkout works end-to-end (Test) | 10 clean + failed + replay + race + authorized-not-captured | **KYC approved** (late 1wk → Live cutover slips 1:1) |
 | 7–8 | Phase 4: player, progress, resume, dashboard, gating | Enrolled experience complete | Resume works; direct-URL block verified | legal text started (soft) |
 | 9 | Phase 5 (YT scope): scheduler, reminders, join, dry-run class | First real live class | Dry-run with mentor + 2 students; manual ingest same day | mentor confirmed; **v1.1 SDK spike decision (100ms vs RealtimeKit)** |

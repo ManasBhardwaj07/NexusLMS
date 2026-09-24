@@ -11,7 +11,7 @@ platform that runs the business: catalog → payment → delivery → live class
 | Student (18+) | Watch lectures, progress, resume, live classes, invoices/refund status |
 | Student (minor, <18) | Same, AFTER verifiable parental consent; no analytics/tracking per DPDP §9 |
 | Parent | Verify consent for a minor's account (email/phone verification link) |
-| Mentor | Host live sessions (v1: via founder-managed YouTube; no mentor dashboard in v1 — confirmed acceptable) |
+| Mentor | Host live sessions (v1: via unlisted YouTube Live; no mentor dashboard in v1 — confirmed acceptable) |
 | Admin | CMS, pricing, coupons, refunds, revenue, reconciliation, audit log |
 
 ## 3. v1 scope — FROZEN (v2.0: minors handling added per DELTA-1; nothing else changed)
@@ -21,7 +21,7 @@ platform that runs the business: catalog → payment → delivery → live class
 3. Admin CMS: course→module→lecture CRUD; Cloudflare Stream direct upload; publish/pricing
 4. Payments: Razorpay embedded checkout; server-verified; webhook source of truth; idempotent; refunds;
    coupons (server-validated); manual Payment Links Wk3–4 via same verified path;
-   **purchaser-of-record checkout variant PENDING Wk2 founder/CA decision**
+   **purchaser-of-record checkout variant PENDING Wk2 policy decision**
 5. Post-purchase: auto-enrollment; queued invoice email; dashboard; signed-URL player; per-lecture progress;
    resume; server-side gating
 6. Live classes (cohort 1): scheduling; reminders; dashboard-gated rotated YouTube links; MANUAL same-day VOD ingest
@@ -53,6 +53,6 @@ cost ≤ ₹9.5k/mo infra at 0–100 students.
 First cohort runs end-to-end; 10 clean test purchases incl. failure/replay/race/authorized-not-captured;
 real production purchase with monitoring live; minors consent flow verified end-to-end.
 
-## 7. Founder decisions still open (not blocking Wk1; blocking their stated weeks)
+## 7. Policy decisions still open (not blocking Wk1; blocking their stated weeks)
 Brand palette · watermark visibility · **Wk2: GST + refund policy + purchaser-of-record/minors posture** ·
-course pricing itself (his business call, needed before Phase 3 test data).
+course pricing (needed before Phase 3 test data).
