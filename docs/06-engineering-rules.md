@@ -17,3 +17,9 @@ replay/single-use), minor-gating middleware matrix (PENDING vs VERIFIED × learn
 never fire analytics outside track(); never store parent verification tokens unhashed-at-rest beyond their 48h life
 (tokens hashed in DB, plaintext only in the emailed link)**
 ## 10. Scope freeze & change control — v1.0 verbatim (3 legitimate breaks; v2 backlog default; 24h written impact replies)
+
+## 11. Living Rules Protocol [NEW]
+Rules must grow with every feature, or they die.
+- **PR Rules Delta:** Every feature/fix PR must include a "Rules" section answering: what new invariant does this code create? Add it to this file or `pr-rules.md` (or justify none).
+- **Runbooks:** Every new integration (3rd-party SDK, provider) must add a short runbook stub in `docs/runbooks/`.
+- **Quarterly Audit:** Run `/skills/product-readiness-audit` against the whole platform quarterly (or at Phase 7).
