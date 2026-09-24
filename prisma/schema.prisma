@@ -52,7 +52,7 @@ model ParentalConsent {
   method         ConsentMethod
   parentEmail    String?
   parentPhone    String?
-  token          String        @unique   // single-use verification token
+  tokenHash      String        @unique   // bcrypt hash of single-use token; plaintext only in emailed link (48h life)
   tokenExpiresAt DateTime
   verifiedAt     DateTime?
   ipAddress      String?                  // evidence
@@ -228,6 +228,8 @@ model Coupon {
   validFrom DateTime
   validTo DateTime
   maxUses Int?
+  // usedCount is a cached counter only — source of truth is COUNT(CouponRedemption) in a txn.
+  // Never use this for maxUses enforcement; read redemption rows in the same txn as the new redemption insert.
   usedCount Int @default(0)
   perUserLimit Int @default(1)
   active Boolean @default(true)
@@ -253,13 +255,17 @@ model WebhookEvent {
   eventType String
   payload Json
   processedAt DateTime?
+  relatedOrderId String?            // FK to Order for fast reconciliation lookups
   createdAt DateTime @default(now())
 }
 
+enum ActorType { ADMIN SYSTEM }
+
 model AdminAction {
   id String @id @default(uuid())
-  adminId String
-  admin User @relation(fields: [adminId], references: [id])
+  actorType ActorType @default(ADMIN)   // SYSTEM for automated jobs (expiry, BullMQ); ADMIN for human mutations
+  adminId String?
+  admin User? @relation(fields: [adminId], references: [id])
   action String
   entity String
   entityId String

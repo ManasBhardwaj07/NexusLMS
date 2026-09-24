@@ -35,7 +35,7 @@
 - [ ] Toolchain: Node LTS, pnpm, Docker Desktop, GitHub CLI
 - [ ] Org accounts (free tiers; founder = billing owner, you = member): Neon, Upstash, Vercel, Render, Cloudflare, Sentry
 - [ ] Google Cloud OAuth client (dev) · Resend test-domain sending verified
-- [ ] Execute `10-changelog-and-launch.md` Week-1 task list only
+- [ ] Execute `10-launch-checklist.md` Week-1 task list only
 
 ## ⚖️ LEGAL — DAY-1 (founder's plate; your job is forcing the questions)
 1. **Entity:** offer letter says "QAVYRN" — registered or not? If not, KYC runs as founder's sole proprietorship
@@ -47,3 +47,16 @@
 4. **Invoices:** tax-compliant invoice per paid order; format sign-off Wk12.
 5. **Your protection (parallel, non-negotiable):** payroll checkpoint 1–5 Oct; weekly written founder updates;
    this pack + offer letter in your private archive = evidence trail for month-3 review and interviews.
+
+## 📋 Achievement Log
+*Running record — update every Friday; feeds the founder update.*
+
+**24 Sep 2026:**
+- Repo live, branch protection + CI enforced, planning pack committed.
+- Restored repo to exact Day-1 state (docs/ pack, skeleton dirs, bootstrap CI, NO code).
+- Updated CODEOWNERS with real founder GitHub handle (@suryansh).
+- Drafted Founder Pack messages F-1 to F-4 for review.
+- Applied v2.1 schema fixes (tokenHash, actorType, relatedOrderId, usedCount annotation).
+- Repo finalization: 6 files removed/merged/archived, docs at 11-file cap, structure locked.
+
+**Next action:** Week 1 Day 2 — toolchain + accounts, OAuth client, Resend test send.

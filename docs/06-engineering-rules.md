@@ -17,3 +17,16 @@ replay/single-use), minor-gating middleware matrix (PENDING vs VERIFIED × learn
 never fire analytics outside track(); never store parent verification tokens unhashed-at-rest beyond their 48h life
 (tokens hashed in DB, plaintext only in the emailed link)**
 ## 10. Scope freeze & change control — v1.0 verbatim (3 legitimate breaks; v2 backlog default; 24h written impact replies)
+
+## 11. Living Rules Protocol [NEW]
+Rules must grow with every feature, or they die.
+- **PR Rules Delta:** Every feature/fix PR must include a "Rules" section answering: what new invariant does this code create? Add it to this file or the PR template Step 0 checklist (or justify none).
+- **Runbooks:** Every new integration (3rd-party SDK, provider) must add a short runbook stub in `docs/runbooks/`.
+- **Quarterly Audit:** Run the readiness audit checklist quarterly or at Phase 7 (checklist: `09-blind-spot-review.md` Part B).
+- **Placement Law:** Executable artifacts (schema, configs, workflows) live in functional folders (`prisma/`, `.github/`, `web/`, `api/`, `packages/`); `docs/` holds prose/decisions/plans ONLY and never duplicates code. Root = prose/config max 3 (`README.md`, `.gitignore`, `.editorconfig`) + functional workspace dirs.
+- **Git Status:** `git status` must be clean before any PR.
+- **Folder README rule:** A folder gets a README only if it explains something not covered by the root README or the docs pack. Empty skeleton folders never get READMEs. If a folder's contents become self-explanatory, the README gets deleted, not updated forever.
+- **Pointer-file rule:** A pointer file (a `.md` whose only purpose is linking to another file) must stay under ~10 lines. If it grows past that, merge its content into the target file.
+- **`.gitkeep` expiry:** A `.gitkeep`-only folder is acceptable only *before* that folder's phase has started. Past the phase gate, an empty skeleton is a missing-work signal.
+- **No new file for a structural decision:** When a new invariant, process rule, or state record is created — add a section to the existing file that owns that topic. A new file is only justified if no existing file owns the topic AND the content would be orphaned if merged. When in doubt: section, not file.
+- **docs/ cap:** `docs/` is capped at 11 files — one-in-one-out, no exceptions without amending this rule.
