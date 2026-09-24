@@ -58,5 +58,6 @@
 - Drafted Founder Pack messages F-1 to F-4 for review.
 - Applied v2.1 schema fixes (tokenHash, actorType, relatedOrderId, usedCount annotation).
 - Repo finalization: 6 files removed/merged/archived, docs at 11-file cap, structure locked.
+- 24 Sep — skills restored as Phase-7 runbook (full text), real CI gates live (docs cap, placement law, secrets enforced on every PR), branch protection updated. Repo infrastructure complete.
 
 **Next action:** Week 1 Day 2 — toolchain + accounts, OAuth client, Resend test send.

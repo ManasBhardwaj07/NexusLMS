@@ -77,6 +77,7 @@ but that means personal liability, so it's his informed call, ideally CA-checked
 proof, bank+cheque, website URL, honest low volume), apply once. Why: Live-Mode is impossible without approval;
 Test Mode is fine for all dev. Late by X → Live cutover (Wk13) slips 1:1. Your ask: proof of submission by Friday.
 **Hard rules: HE is the account owner/KYC applicant — you join as team member after approval, never before.**
+08-kyc-guide is founder-ops documentation: archive it from the repo the day KYC is approved (TTL'd, not permanent).
 
 **F-2. Entity question — DUE Wk1**
 What: is QAVYRN a registered entity? If yes, certificate please (needed for KYC + your employment record). If no,
