@@ -21,6 +21,7 @@ Compiled 23 Sep 2026 · Personas A (Senior Staff Architect) + B (SDE-3) · Sourc
 | `09-blind-spot-review.md` | Part B: external reviewer checklist (live Phase 7 gate) | ❌ |
 | `10-launch-checklist.md` | FINAL Wk1+Wk2 day-by-day task lists (risks in MASTER §12; changelog = git log) | (risks reference founder) |
 | *(prisma/)* `schema.prisma` + `schema-notes.md` | Full data model + migration rules + seed plan | ❌ |
+| *(skills/)* `product-readiness-audit/SKILL.md` | Phase-7 product readiness audit runbook & checklist mirror (09 Part B) | ❌ |
 | *(external)* Decision Audit v1.1, Appendix A1/A2 | Rationale record + the two founder message drafts | ✅ the actual message texts |
 
 **Founder Pack shortcut: everything you must raise with Suryansh is in §3 below — nothing founder-facing lives only in another file.**
