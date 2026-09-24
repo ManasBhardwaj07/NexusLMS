@@ -1,15 +1,6 @@
 # 09 — Blind-Spot Review v2.0
-## Part A — Gap record (everything caught to date, chronologically)
-1. v1.0 six: domain@Wk1 mis-dated · YouTube 24h activation · Razorpay account ownership · entity/legal ambiguity ·
-   mentor has no v1 UI · email warm-up ownerless → all patched
-2. DELTA-1: DPDP minors under-scoped → now a real feature (DOB, parental consent, analytics ban, purchaser-of-record question)
-3. DELTA-2: refund-policy decision Wk10 → Wk2 (bundled with GST + minors, one founder conversation)
-4. DELTA-3: tokenVersion per-request DB hit → Redis ≤60s cache with immediate invalidation
-5. DELTA-4: docs must survive independent review → self-verification pass run at production of v2.0 (results below)
-6. Self-verification findings fixed in v2.0: (a) two-token auth smell → single shared jose verifySession;
-   (b) coupon usedCount race → redemption rows are the source of truth, count updated in-txn;
-   (c) consent tokens at rest → hashed storage, plaintext only in emailed link (48h life);
-   (d) minors consent E2E added to Phase 7 gate; (e) seed data now includes a minor + verified-consent account.
+## Part A — Gap record
+All v1.0–v2.0 gaps patched; fixes live in `prisma/schema.prisma` (actorType, tokenHash, relatedOrderId), `prisma/schema-notes.md` v2.1, and `docs/06-engineering-rules.md` §9/§11.
 
 ## Part B — Remaining checklist for the external reviewer
 - [ ] Walk the 5 flows as user / attacker / Razorpay-retry-logic against `02-architecture-trd.md`
