@@ -16,7 +16,7 @@ Compiled 23 Sep 2026 · Personas A (Senior Staff Architect) + B (SDE-3) · Sourc
 | `04-api-contract.md` | Every endpoint, auth, idempotency, error codes | ❌ |
 | `05-uiux-spec.md` | Pages, components, states, tokens, minors screens | ✅ palette decision |
 | `06-engineering-rules.md` | Code/git/test/security/freeze/placement rules (living doc) | ❌ |
-| `07-execution-plan.md` | Week 1–14 plan, gates, buffer accounting | ✅ external dependency column |
+| `07-execution-plan.md` | Week 1–15 plan, gates, buffer accounting | ✅ external dependency column |
 | `09-blind-spot-review.md` | Part B: external reviewer checklist (live Phase 7 gate) | ❌ |
 | `10-launch-checklist.md` | FINAL Wk1+Wk2 day-by-day task lists (risks in MASTER §12; changelog = git log) | (risks reference external items) |
 | *(prisma/)* `schema.prisma` + `schema-notes.md` | Full data model + migration rules + seed plan | ❌ |
@@ -29,7 +29,7 @@ Compiled 23 Sep 2026 · Personas A (Senior Staff Architect) + B (SDE-3) · Sourc
 
 CodeAscend (QAVRYN's edtech brand) sells 2 competitive-programming courses online: catalog → free preview →
 embedded Razorpay checkout → auto-enrollment → recorded video library + live classes. One solo developer.
-70 working days / 14 weeks to production. Budget-conscious. Audience skews 16–18 (minors — DPDP applies).
+72 working days / 15 weeks to production. Budget-conscious. Audience skews 16–18 (minors — DPDP applies).
 Live classes v1 = YouTube Live + manual recording ingest (full SDK = v1.1 after cohort 1).
 Success = first cohort runs end-to-end + real payments flow with monitoring — not feature count.
 
@@ -39,7 +39,7 @@ Success = first cohort runs end-to-end + real payments flow with monitoring — 
 
 1. **Stack:** Next.js 14 App Router · Express (not NestJS) · Neon Postgres + Prisma · Upstash Redis + BullMQ ·
 Vercel (web) + Render (API + worker) · Cloudflare Stream · Razorpay · Resend · Sentry. Monorepo, pnpm workspaces.
-2. **Timeline:** 70 working days / 14 weeks (63 build + 7 buffer). Scope rejection of YouTube-Live → 16 weeks.
+2. **Timeline:** 72 working days / 15 weeks (63 build + 9 buffer). Scope rejection of YouTube-Live → 16 weeks.
 3. **Live v1:** unlisted YouTube Live, rotated dashboard-gated links (never emailed raw), manual same-day VOD ingest.
 v1.1 SDK (100ms vs Cloudflare RealtimeKit spike at Wk9) after cohort 1.
 4. **Auth:** one NextAuth JWT (JWE, 15-min sliding) `{uid, role, tv}`; shared `jose` verifySession() used by BOTH
@@ -201,7 +201,7 @@ or formal timeline re-quote in writing. Scope asks → v2 backlog + 24h written 
 
 ## PART 10 — EXECUTION PLAN (complete)
 
-70 working days = 63 build + 7 buffer, 14 weeks. (Phase 1 grew 6→8 for minors feature; buffer 9→7.)
+72 working days = 63 build + 9 buffer, 15 weeks. (Phase 1 grew 6→8 for minors feature; buffer 7→9.)
 
 | Wk | Build | Gate | External dependency (late → impact) |
 | --- | --- | --- | --- |
@@ -214,7 +214,7 @@ or formal timeline re-quote in writing. Scope asks → v2 backlog + 24h written 
 | 10 | Admin dashboard, refunds+audit, coupons, reconciliation | refund same-session; coupon math correct | — |
 | 11–12 | Unit+E2E suites, 3G player, bursts, URL expiry, consent E2E, restore drill | E2E green; security checks pass; drill done | legal final + invoice sign-off (late → launch slips; hard blocker) |
 | 13 | Prod deploy, domain, Live-Mode cutover, monitoring | real purchase on prod; monitors alert | DNS (since Wk1) |
-| 14 | Buffer (5d) + 2 floating | — | pre-spent buffer = red flag |
+| 14–15 | Buffer (5d) + 4 floating | — | pre-spent buffer = red flag |
 
 Cadence: build Mon–Fri vs current row · daily 3-line private log · Friday written progress update · dated achievement
 log. Gates: no phase starts until prior gate passes; P0 security fix may interrupt any phase. Escalation verbatim:

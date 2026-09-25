@@ -82,7 +82,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - name: ESLint
         run: |
-          if [ -f eslint.config.js ] || [ -f .eslintrc.cjs ]; then
+          if [ -f web/.eslintrc.json ] || [ -f eslint.config.js ]; then
             pnpm lint
           else
             echo "eslint config lands Week 1 Day 3 — skipping until then"

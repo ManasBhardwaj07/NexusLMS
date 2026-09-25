@@ -14,7 +14,7 @@ Estimate: 63 build days + 9 buffer days = **72 working days / 15 weeks**. (Timel
 | 10 | Phase 6: admin dashboard, refunds+audit, coupons, reconciliation | Admin can refund/coupon/read revenue | Refund same-session visible; coupon math server-correct | refund-policy decision already made Wk2 (build only here) |
 | 11–12 | Phase 7: unit+E2E suites, 3G player, rate-limit bursts, URL expiry, **consent-flow E2E**, restore drill | Nothing new visible — reliability proven | E2E green in CI; security checks pass; restore drill done | **legal copy final + invoice format sign-off** (late → launch slips; hard blocker) |
 | 13 | Phase 8: prod deploy, domain, Live-Mode cutover, monitoring | Site live; real payments | Real low-value purchase; invoice received; monitors alert | DNS access (exists since Wk1) |
-| 14 | Buffer (5d) + 2 floating buffer days | — | Reserved; pre-spent = red flag | — |
+| 14–15 | Buffer (5d) + 4 floating buffer days | — | Reserved; pre-spent = red flag | — |
 
 Critical path unchanged: KYC (Wk1) → Wk2 decisions → content (Wk4) → legal (Wk12).
 Cadence/gates/escalation/freeze/risk register: v1.0 §2–§6 verbatim (unchanged and still binding).

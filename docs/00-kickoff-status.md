@@ -12,7 +12,7 @@
 
 ## 🟡 PENDING DECISIONS (External)
 1. Live-class scope change — unlisted YouTube Live + manual same-day VOD ingest vs full SDK (approval or 16-wk plan)
-2. Timeline confirmation — 14 weeks milestone-framed schedule
+2. Timeline confirmation — 15 weeks milestone-framed schedule
 3. **Wk2 policy decisions: GST treatment · refund policy · minor-user posture (incl. purchaser-of-record)** — one written record
 4. Brand palette (CodeAscend navy/gold vs entity palette) — blocks UI tokens
 5. Visible watermark (student email on player) — confirm acceptable
