@@ -3,7 +3,7 @@
 
 ## ✅ LOCKED (change = written change-control per rules §10)
 - Stack: Next.js 14 · Express · Neon + Prisma · Upstash Redis + BullMQ · Vercel + Render · Cloudflare Stream · Razorpay · Resend · Sentry
-- Timeline: 70 working days / 14 weeks (buffer now 7 days — see changelog: minors feature absorbed 2 buffer days)
+- Timeline: 15 weeks (acknowledging realistic overlap and real-world blockers; 16 weeks acceptable if unforeseen blockers arise).
 - Live classes v1 = unlisted YouTube Live + manual same-day VOD ingest (SDK = v1.1, Wk9 decision gate)
 - Auth: single NextAuth JWT (jose, shared verify) + tokenVersion revocation via ≤60s Redis cache (never per-request DB hit)
 - Payments: webhook = source of truth, idempotent by design, failure-mode-tested DoD
@@ -20,7 +20,8 @@
 ## 🔴 EXTERNAL DEPENDENCIES (late by X → impact Y)
 | Item | Due | Impact if late |
 |---|---|---|
-| Razorpay account + approved KYC | Wk1 (submission), Wk6 (approval) | Live-Mode cutover (Wk13) slips 1:1 — #1 schedule risk |
+| Razorpay account + approved KYC | In Process | Managed entirely by founder. Live-Mode cutover slips 1:1 if late. |
+| Neon DB Account Credentials | Day-1 | Blocked until founder provides company email (developer will not use personal email). |
 | Domain + Cloudflare + DNS access | Wk1 | Email auth/warm-up/SEO blocked; slips everything comms-related |
 | YouTube channel, live streaming enabled | Wk1–2 | 24h activation wait can silently kill Wk9 dry-run |
 | Business entity registration status | Wk1 | Determines KYC business type and liability structure |

@@ -1,8 +1,6 @@
-# 07 — Master Execution Plan v2.0 FINAL — Week 1–14 (solo dev)
+# 07 — Master Execution Plan v2.0 FINAL — Week 1–15 (solo dev)
 
-Estimate: 63 build days + 7 buffer days = **70 working days / 14 weeks** (v2.0: Phase 1 grew 6→8 days for
-DOB capture + parental-consent flow per DELTA-1; buffer shrank 9→7). Scope change rejection (full in-app SDK)
-→ +9 days → 16 weeks.
+Estimate: 63 build days + 9 buffer days = **72 working days / 15 weeks**. (Timeline adjusted to 15 weeks to accommodate real-world blockers without micromanaging buffer days. 16 weeks acceptable if major blockers occur).
 
 | Wk | Focus | Milestone / Output | Gate (binary) | External dependency (late by X → Y) |
 |---|---|---|---|---|
