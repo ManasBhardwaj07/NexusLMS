@@ -2,8 +2,27 @@
 *v1.0 unchanged; v2.0 additions marked [NEW]. CI enforces what it can; review enforces the rest.*
 
 ## 1. Repo — v1.0 (monorepo: /web /api /packages/shared-types /packages/auth **[NEW: + /packages/analytics]** /docs /prisma; path-based CI)
-## 2. Git & PRs — v1.0 (conventional commits; PR = What/Why/How-tested; no direct main pushes)
+## 2. Git & PRs — v1.0 + [NEW] branch naming and commit rules
+
+**Branch naming (industry standard):** `<type>/<short-desc>`
+Types: `feature/`, `bugfix/` (or `fix/`), `chore/`, `docs/`, `refactor/`.
+Examples: `feature/parental-consent`, `bugfix/webhook-replay`, `chore/github-actions`.
+Never use generic names like `test`, `update`, or `temp`.
+
+**Commit messages (hard convention):** Short and precise. Prefix required:
+- `feat:` — new user-facing or backend functionality
+- `fix:` — resolves a defect or unintended behavior
+- `chore:` — CI, scripts, linting, dependencies, repo hygiene
+- `docs:` — planning pack, guides, or inline documentation
+
+Examples: `feat: add DOB field to signup form`, `fix: webhook replay dedup`.
+Keep to 1-2 lines normally. Up to 3-4 lines is allowed ONLY for major architectural changes where context is critical. Otherwise, long explanations go in the PR description, not the commit.
+
+**PRs:** PR = What/Why/How-tested (per template). No direct pushes to `main`. Squash merge to keep `main` history clean.
 ## 3. Code standards — v1.0 (strict TS; modules/{routes,controller,service,repository}; zod at boundaries; pino; paise; UTC)
+**[NEW] Code Comments Rule:** Strict minimalist commenting. No commenting on the obvious. Comments must be short, precise, and to the point.
+- **Criteria for inclusion:** Only comment *why* something is done if it's a non-obvious business rule, a hack for a known bug, or a complex algorithmic decision.
+- **Never:** Never write a comment and then another comment right after (no chained/redundant comments). Never comment *what* the code is doing (the code itself should explain what it does).
 ## 4. Security baseline — v1.0 (rate limits day-1; helmet; CORS allowlist; bcrypt(12); webhook sig verify; npm audit in CI)
 **[NEW] tokenVersion revocation:** Redis key `tv:{uid}` TTL ≤60s; every bump deletes the key in the same
 operation; shared verifySession() in /packages/auth is the ONLY session-verification path (lint-enforced:
