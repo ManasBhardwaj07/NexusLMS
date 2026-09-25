@@ -31,3 +31,10 @@ Rules must grow with every feature, or they die.
 - **`.gitkeep` expiry:** A `.gitkeep`-only folder is acceptable only *before* that folder's phase has started. Past the phase gate, an empty skeleton is a missing-work signal.
 - **No new file for a structural decision:** When a new invariant, process rule, or state record is created — add a section to the existing file that owns that topic. A new file is only justified if no existing file owns the topic AND the content would be orphaned if merged. When in doubt: section, not file.
 - **docs/ cap:** `docs/` is capped at 11 files — one-in-one-out, no exceptions without amending this rule.
+
+## 12. Phase 0–1 Configuration Baselines [NEW]
+These configuration decisions must be enforced as we build out the MVP to prevent rediscovering issues under load:
+1. **Database:** Neon `DATABASE_URL` must use the pooled (`-pooler`) endpoint starting from the first migration.
+2. **Performance:** Catalog/course-detail pages must be cached (ISR or edge-cache on Vercel), not re-rendered per request.
+3. **Rate Limits:** Must be scoped per-user/IP, not global.
+4. **Workers:** BullMQ workers must have an explicit concurrency setting, not rely on the default.
