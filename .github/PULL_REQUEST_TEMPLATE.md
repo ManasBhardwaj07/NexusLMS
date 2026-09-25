@@ -1,57 +1,33 @@
-## Pull Request
+## Step 0: PR Pre-Flight Gate
+<!-- All items below are mandatory — see docs/06-engineering-rules.md §11 for the rule set. -->
 
-### Type of Change
+**Mandatory for ALL PRs:**
+- [ ] **Scope check:** Inside v1 freeze? If not: v2 backlog or written timeline re-quote.
+- [ ] **Secrets scan:** No `.env`, keys, tokens, or PII in `git diff`.
+- [ ] **Achievement-log:** One line added to `## Achievement Log` in `docs/00-kickoff-status.md`.
 
-- [ ] Feature (new user-facing or backend functionality)
-- [ ] Bug Fix (resolves a defect or unintended behavior)
-- [ ] Documentation (planning pack, guides, or inline docs)
-- [ ] Chore (CI, scripts, linting, dependencies)
-- [ ] Security / Compliance (DPDP, auth, rate-limiting, secrets)
-
-### Affected Components
-
-- [ ] `web/` — Next.js frontend
-- [ ] `api/` — Express API
-- [ ] `packages/` — shared-types, auth, analytics
-- [ ] `prisma/` — database schema and migrations
-- [ ] `docs/` or `.github/` — architecture and automation
+**Mandatory for `api/` / `prisma/` / payments PRs:**
+- [ ] **Tests:** New logic has tests; payment-path changes include regression tests (docs/06 §5).
+- [ ] **Idempotency:** New write path names its idempotency anchor (schema-level or header-level).
+- [ ] **Money/dates:** Paise ints only. UTC only.
+- [ ] **Rules delta:** What new invariant does this code create? Add to `docs/06` §11 or justify none.
 
 ---
 
-### Summary
+## What
+<!-- one line -->
 
-**What:**
-<!-- One or two sentences describing what this PR does. -->
+## Why
+<!-- which user story / decision / gap this serves -->
 
-**Why:**
-<!-- Which user story, task, decision, or bug this addresses. -->
+## How tested
+<!-- commands run + what you verified -->
 
----
+## Risk
+<!-- payments path? data model? none? -->
 
-### Testing
+## Rules Delta
+<!-- What new invariant does this code create? Did you add it to docs/06-engineering-rules.md? If none, justify why. -->
 
-**How tested:**
-<!-- Commands run and what you verified. Example: `pnpm test`, `bash scripts/check-file-placement.sh` -->
-
-**Risk:**
-
-- [ ] Low — documentation, isolated script, non-critical path
-- [ ] Medium — touches core routes or database reads
-- [ ] High — touches payments, auth revocation, or database migrations
-
----
-
-### Pre-Flight Checklist
-
-**All PRs:**
-
-- [ ] Within frozen v1 scope (if not: v2 backlog or written timeline re-quote)
-- [ ] No `.env` files, API keys, tokens, or PII in `git diff`
-- [ ] Achievement log updated in `docs/00-kickoff-status.md`
-
-**API, Prisma, or Payments PRs only:**
-
-- [ ] Unit tests added; payments include regression tests (ref: `docs/06` section 5)
-- [ ] Write path names its idempotency anchor (`Idempotency-Key`, `providerEventId`, `@@unique`)
-- [ ] Integer paise only (no floats); strict UTC timestamps
-- [ ] Rules delta documented in `docs/06` section 11 (or justified: none)
+## Achievement-log line
+<!-- dated, factual — feeds the Friday progress update in docs/00-kickoff-status.md -->
