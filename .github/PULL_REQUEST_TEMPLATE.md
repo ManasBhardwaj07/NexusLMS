@@ -1,54 +1,57 @@
-## 📌 Pull Request Overview
+## Pull Request
 
-### 1. Type of Change
-Select all that apply:
-- [ ] 🚀 **New Feature** (adds user-facing or backend functionality)
-- [ ] 🐛 **Bug Fix** (resolves a defect or unintended behavior)
-- [ ] 📝 **Documentation** (updates to planning pack or guides)
-- [ ] 🔧 **Chore / Tooling** (CI, scripts, linting, dependencies)
-- [ ] 🔒 **Security / Compliance** (DPDP, auth, rate-limiting, secret management)
+### Type of Change
 
-### 2. Affected Components
-- [ ] `web/` (Next.js frontend)
-- [ ] `api/` (Express API)
-- [ ] `packages/` (shared-types, auth, analytics)
-- [ ] `prisma/` (database schema & migrations)
-- [ ] `docs/` or `.github/` (architecture & automation)
+- [ ] Feature (new user-facing or backend functionality)
+- [ ] Bug Fix (resolves a defect or unintended behavior)
+- [ ] Documentation (planning pack, guides, or inline docs)
+- [ ] Chore (CI, scripts, linting, dependencies)
+- [ ] Security / Compliance (DPDP, auth, rate-limiting, secrets)
 
----
+### Affected Components
 
-## 📝 Summary & Rationale
-
-**What was changed:**
-> Describe what this PR does in 1–2 clear sentences.
-
-**Why it was changed:**
-> Which user story, task, architectural decision, or bug does this address?
+- [ ] `web/` — Next.js frontend
+- [ ] `api/` — Express API
+- [ ] `packages/` — shared-types, auth, analytics
+- [ ] `prisma/` — database schema and migrations
+- [ ] `docs/` or `.github/` — architecture and automation
 
 ---
 
-## 🧪 Testing & Verification
+### Summary
 
-**How was this tested?**
-- Commands executed: (e.g., `bash scripts/check-file-placement.sh`, `pnpm test`, `pnpm typecheck`)
-- Verification outcome: (e.g., all checks passed locally)
+**What:**
+<!-- One or two sentences describing what this PR does. -->
 
-**Risk level:**
-- [ ] None / Low (documentation, isolated script, non-critical path)
-- [ ] Medium (touches core routes or database reads)
-- [ ] High (touches payments, auth revocation, or database migrations)
+**Why:**
+<!-- Which user story, task, decision, or bug this addresses. -->
 
 ---
 
-## 🛡️ Step 0: Pre-Flight Safety Gate
+### Testing
 
-**Mandatory for ALL PRs:**
-- [ ] **Scope Check:** Within frozen v1 scope? (If not: v2 backlog or written timeline re-quote)
-- [ ] **Secrets Scan:** Zero `.env` files, API keys, private tokens, or PII in `git diff`
-- [ ] **Achievement Log:** One dated line added to `## Achievement Log` in `docs/00-kickoff-status.md`
+**How tested:**
+<!-- Commands run and what you verified. Example: `pnpm test`, `bash scripts/check-file-placement.sh` -->
 
-**Mandatory for `api/`, `prisma/`, or Payments PRs:**
-- [ ] **Automated Tests:** New logic has unit tests; payments include regression tests (`docs/06` §5)
-- [ ] **Idempotency Anchor:** Write path names its anchor (`Idempotency-Key`, `providerEventId`, `@@unique`)
-- [ ] **Money & Time:** Integer paise only (no float). Strict UTC timestamps only.
-- [ ] **Rules Delta:** Did this code introduce a new system invariant? (Documented in `docs/06` §11 or justified none)
+**Risk:**
+
+- [ ] Low — documentation, isolated script, non-critical path
+- [ ] Medium — touches core routes or database reads
+- [ ] High — touches payments, auth revocation, or database migrations
+
+---
+
+### Pre-Flight Checklist
+
+**All PRs:**
+
+- [ ] Within frozen v1 scope (if not: v2 backlog or written timeline re-quote)
+- [ ] No `.env` files, API keys, tokens, or PII in `git diff`
+- [ ] Achievement log updated in `docs/00-kickoff-status.md`
+
+**API, Prisma, or Payments PRs only:**
+
+- [ ] Unit tests added; payments include regression tests (ref: `docs/06` section 5)
+- [ ] Write path names its idempotency anchor (`Idempotency-Key`, `providerEventId`, `@@unique`)
+- [ ] Integer paise only (no floats); strict UTC timestamps
+- [ ] Rules delta documented in `docs/06` section 11 (or justified: none)
