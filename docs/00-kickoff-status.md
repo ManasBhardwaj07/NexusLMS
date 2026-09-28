@@ -57,4 +57,7 @@
 - Repo finalization: 6 files removed/merged/archived, docs at 11-file cap, structure locked.
 - 24 Sep — skills restored as Phase-7 runbook (full text), real CI gates live (docs cap, placement law, secrets enforced on every PR), branch protection updated. Repo infrastructure complete.
 
-**Next action:** Week 1 Day 2 — toolchain + accounts, OAuth client, Resend test send.
+**28 Sep 2026:**
+- Week 1 Day 4 complete: DB schema audited and locked (v2.1), Neon connection branching workflow proven with synthetic seed data, guardrails codified.
+
+**Next action:** Week 1 Day 5 — Sentry + /health + env convention + gate check + Friday progress update.
