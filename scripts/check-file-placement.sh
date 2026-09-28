@@ -3,11 +3,12 @@
 set -euo pipefail
 fail=0
 
-# 1. No executable/tool-parsed artifacts in docs/ (docs/ is prose-only)
+# 1. Only .md files allowed in docs/, skills/, .agents/
 while IFS= read -r f; do
-  echo "FAIL: $f — tool-parsed file inside docs/ (placement law: docs/ is prose-only)"
+  echo "FAIL: $f — non-.md file inside prose/skill folder (placement law: must be .md)"
   fail=1
-done < <(git ls-files 'docs/*.prisma' 'docs/*.ts' 'docs/*.tsx' 'docs/*.sql' 'docs/*.yml' 'docs/*.yaml' 'docs/*.json')
+done < <(git ls-files 'docs/*' 'skills/*' '.agents/*' | grep -v '\.md$')
+
 
 # 2. No prose inside code folders (exception: prisma/schema-notes.md — coupled to schema.prisma)
 while IFS= read -r f; do

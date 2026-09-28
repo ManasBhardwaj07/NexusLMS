@@ -8,7 +8,7 @@ Minor-flagged sessions are never counted in analytics (client-side `track()` enf
 ## Auth (5/min/IP)
 | Method | Path | Auth | Notes |
 |---|---|---|---|
-| POST | /auth/register | — | email+password+**dateOfBirth (required)**+consent checkbox → sets consentAt, consentState; sends verification email; minors → consentState PENDING |
+| POST | /auth/register | — | email+password+**dateOfBirth (required)**+consent checkbox → sets consentState; minor-consent timestamps recorded on ParentalConsent.verifiedAt; adult consent timestamp (consentAt on User) lands with the Week 2 auth build via migration; sends verification email; minors → consentState PENDING |
 | POST | /auth/verify-email | — | token |
 | POST | /auth/forgot-password | — | always 200; 3/hour/IP |
 | POST | /auth/reset-password | — | single-use token; bumps tokenVersion + invalidates Redis tv key |

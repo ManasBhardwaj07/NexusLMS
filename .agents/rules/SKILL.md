@@ -1,6 +1,7 @@
 ---
 name: agent
 description: Strict operating rules and double-check processes for AI agents working in this repository.
+invoking_gate: every-generation
 ---
 
 # Agent Operating Rules
@@ -16,3 +17,7 @@ You are working in a highly disciplined environment. You must adhere to the foll
 7. **Version Verification Before Invocation:** Never run unversioned `npx <pkg>` commands. Check `package.json` and lockfile first to ensure tools run with exact pinned versions. Pre-release / RC versions are strictly forbidden.
 8. **Schema & Migration Pre-Flight:** Always run `npx prisma validate` and `npx prisma format` before generating or applying migrations.
 9. **Config & Env Syntax Check:** Always verify balanced quotes and formatting in `.env` files before running commands that consume them.
+
+## CODE PATH Protocol
+Every code change: (1) load this file + docs/06 + relevant skill FIRST · (2) write code smallest-surface-first · (3) run pnpm lint/typecheck/test locally · (4) run the security skill self-review on any api/prisma/packages/auth change (checklist: idempotency anchor named? auth column on new endpoint? secrets touched? paise/UTC? minors gate?) · (5) PR must complete the 'Skills run' checklist.
+

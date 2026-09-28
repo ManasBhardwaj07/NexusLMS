@@ -39,6 +39,7 @@ never fire analytics outside track(); never store parent verification tokens unh
 
 ## 11. Living Rules Protocol [NEW]
 Rules must grow with every feature, or they die.
+- **AI Code Path:** AI-generated code follows the CODE PATH in `.agents/rules` — the PR 'Skills run' checkbox is the enforcement point (CI cannot run judgment).
 - **PR Rules Delta:** Every feature/fix PR must include a "Rules" section answering: what new invariant does this code create? Add it to this file or the PR template Step 0 checklist (or justify none).
 - **Runbooks:** Every new integration (3rd-party SDK, provider) must add a short runbook stub in `docs/runbooks/`.
 - **Quarterly Audit:** Run `/skills/product-readiness-audit/SKILL.md` (checklist mirror: `09-blind-spot-review.md` Part B) quarterly or at Phase 7.
