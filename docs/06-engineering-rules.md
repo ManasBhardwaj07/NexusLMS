@@ -57,3 +57,7 @@ These configuration decisions must be enforced as we build out the MVP to preven
 2. **Performance:** Catalog/course-detail pages must be cached (ISR or edge-cache on Vercel), not re-rendered per request.
 3. **Rate Limits:** Must be scoped per-user/IP, not global.
 4. **Workers:** BullMQ workers must have an explicit concurrency setting, not rely on the default.
+5. **Tooling & CLI Version Pinning:** Never run unversioned `npx <pkg>` commands. All CLI tools must be pinned in `package.json` to exact stable versions (no floating majors, no `^`/`~` on critical tooling, zero pre-release/RC versions).
+6. **Migration & CLI Interactive Safety:** Interactive inputs (e.g. `y`, `yes`, or arbitrary keystrokes) must NEVER be piped blindly into CLI prompts. If a migration or CLI command prompts unexpectedly for naming or drift consent, immediately abort, inspect the drift via `git diff` or database query, and resolve root cause before proceeding.
+7. **Schema & Migration Pre-flight:** Before executing migrations, validate the schema with `npx prisma validate` and `npx prisma format`. Raw SQL migrations must strictly adhere to the Minimalist Commenting Rule (§3: comment only non-obvious business invariants, never comment what the SQL syntax does).
+8. **Config & Env Integrity:** `.env` and `.env.*` files must be verified for syntax (balanced quotes, valid connection strings) before executing commands that load them.
