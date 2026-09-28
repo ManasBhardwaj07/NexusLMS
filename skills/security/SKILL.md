@@ -1,6 +1,7 @@
 ---
 name: security
 description: Security point-of-view and vulnerability review principles.
+invoking_gate: PR gate (api/prisma changes)
 ---
 
 # Security Point of View

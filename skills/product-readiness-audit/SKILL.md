@@ -3,6 +3,7 @@ name: product-readiness-audit
 version: 1.0
 purpose: Audit platform readiness before major releases.
 when_to_invoke: "before launch / major release / handoff"
+invoking_gate: Phase-7
 owner: manas
 ---
 
