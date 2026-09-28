@@ -9,5 +9,11 @@
     "test": "echo \"no test runner configured yet\"",
     "boundaries": "echo \"dependency-cruiser not configured yet\""
   },
-  "packageManager": "pnpm@9.15.9"
+  "packageManager": "pnpm@9.15.9",
+  "dependencies": {
+    "@prisma/client": "5.22.0"
+  },
+  "devDependencies": {
+    "prisma": "5.22.0"
+  }
 }
