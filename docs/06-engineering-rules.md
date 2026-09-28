@@ -65,3 +65,10 @@ These configuration decisions must be enforced as we build out the MVP to preven
 6. **Migration & CLI Interactive Safety:** Interactive inputs (e.g. `y`, `yes`, or arbitrary keystrokes) must NEVER be piped blindly into CLI prompts. If a migration or CLI command prompts unexpectedly for naming or drift consent, immediately abort, inspect the drift via `git diff` or database query, and resolve root cause before proceeding.
 7. **Schema & Migration Pre-flight:** Before executing migrations, validate the schema with `npx prisma validate` and `npx prisma format`. Raw SQL migrations must strictly adhere to the Minimalist Commenting Rule (§3: comment only non-obvious business invariants, never comment what the SQL syntax does).
 8. **Config & Env Integrity:** `.env` and `.env.*` files must be verified for syntax (balanced quotes, valid connection strings) before executing commands that load them.
+
+## 13. Env & Secrets Conventions [NEW]
+- **Single Source of Truth:** `.env` is the ONLY home for secrets and environment-specific values.
+- **Example File:** `.env.example` must list every variable with empty values and a one-line purpose.
+- **Command Usage:** Commands must reference `$env:` variables, never hardcoded literal secrets.
+- **Exposure Response:** Any exposed credential must be rotated immediately and reported.
+- **Database Connection Rules:** Use `DATABASE_URL_UNPOOLED` exclusively for migrations and CLI inspection. Use the pooled connection for all application runtime queries.

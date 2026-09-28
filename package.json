@@ -2,10 +2,10 @@
   "name": "codeascend-platform",
   "private": true,
   "scripts": {
-    "dev": "pnpm --filter web dev",
+    "dev": "pnpm --filter web --filter api --parallel dev",
     "build": "pnpm --filter web build",
     "lint": "pnpm --filter web lint",
-    "typecheck": "pnpm --filter web exec tsc --noEmit",
+    "typecheck": "pnpm -r --parallel typecheck",
     "test": "echo \"no test runner configured yet\"",
     "boundaries": "echo \"dependency-cruiser not configured yet\""
   },
