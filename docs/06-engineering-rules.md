@@ -62,10 +62,12 @@ These configuration decisions must be enforced as we build out the MVP to preven
 2. **Performance:** Catalog/course-detail pages must be cached (ISR or edge-cache on Vercel), not re-rendered per request.
 3. **Rate Limits:** Must be scoped per-user/IP, not global.
 4. **Workers:** BullMQ workers must have an explicit concurrency setting, not rely on the default.
-5. **Tooling & CLI Version Pinning:** Never run unversioned `npx <pkg>` commands. All CLI tools must be pinned in `package.json` to exact stable versions (no floating majors, no `^`/`~` on critical tooling, zero pre-release/RC versions).
-6. **Migration & CLI Interactive Safety:** Interactive inputs (e.g. `y`, `yes`, or arbitrary keystrokes) must NEVER be piped blindly into CLI prompts. If a migration or CLI command prompts unexpectedly for naming or drift consent, immediately abort, inspect the drift via `git diff` or database query, and resolve root cause before proceeding.
-7. **Schema & Migration Pre-flight:** Before executing migrations, validate the schema with `npx prisma validate` and `npx prisma format`. Raw SQL migrations must strictly adhere to the Minimalist Commenting Rule (§3: comment only non-obvious business invariants, never comment what the SQL syntax does).
-8. **Config & Env Integrity:** `.env` and `.env.*` files must be verified for syntax (balanced quotes, valid connection strings) before executing commands that load them.
+5. **Toolchain Source of Truth:** Versions live in `package.json` (engines, packageManager), `.nvmrc`, and the lockfile. CI reads `.nvmrc`. Any toolchain change = one atomic PR touching all three + docs/11, with human approval.
+6. **No Dependency Churn to fix CI:** Dependencies are never version-bumped to fix CI. A version-caused CI failure is a TOOLCHAIN problem: fix the declaration (engines/.nvmrc/lockfile), or escalate to the human with evidence. Changing a dependency's version requires explicit human approval with a stated reason — 'CI was red' is never a sufficient reason.
+7. **Clean Room Proof:** Any toolchain PR must include evidence that a clean checkout (`corepack enable` → `pnpm install --frozen-lockfile`) runs all gates green on the declared Node version.
+8. **Migration & CLI Interactive Safety:** Interactive inputs (e.g. `y`, `yes`, or arbitrary keystrokes) must NEVER be piped blindly into CLI prompts. If a migration or CLI command prompts unexpectedly for naming or drift consent, immediately abort, inspect the drift via `git diff` or database query, and resolve root cause before proceeding.
+9. **Schema & Migration Pre-flight:** Before executing migrations, validate the schema with `npx prisma validate` and `npx prisma format`. Raw SQL migrations must strictly adhere to the Minimalist Commenting Rule (§3: comment only non-obvious business invariants, never comment what the SQL syntax does).
+10. **Config & Env Integrity:** `.env` and `.env.*` files must be verified for syntax (balanced quotes, valid connection strings) before executing commands that load them.
 
 ## 13. Env & Secrets Conventions [NEW]
 - **Single Source of Truth:** `.env` is the ONLY home for secrets and environment-specific values.

@@ -1,0 +1,28 @@
+# TOOLCHAIN REGISTRY (The Known-Good Set)
+**Single Source of Truth.** No version listed here may be changed without an atomic PR updating this file, `package.json`, `.nvmrc`, and the lockfile, alongside explicit human approval documenting the compatibility impact.
+
+## How to Verify This Document
+This document is the **single source of truth** for the toolchain. To verify this matrix against reality:
+1. Run `pnpm ls -r --depth 0` to see exactly what is resolved in the workspace.
+2. Run `npm view <package> versions` or `npm view <package> deprecated` to check the registry status.
+3. Run `pnpm audit` to verify security health.
+
+## The Compatibility Matrix
+*App runtime dependencies (Next, React, Express) keep standard semver ranges (`^`) in `package.json` as their internal trees manage safe updates; the lockfile pins them. Tooling dependencies are pinned EXACT to prevent CI drift.*
+
+| Tool | Locked version | Verdict | Security / EOL Note |
+|---|---|---|---|
+| **Node.js** | 24 | SAFE-NEAR-TERM | Active LTS; matched to the local environment and required by `dependency-cruiser` 18. |
+| **pnpm** | 9.15.9 | SAFE-NEAR-TERM | Explicitly enforces local/CI parity via `packageManager` field. |
+| **dependency-cruiser** | 18.4.0 | SAFE-NEAR-TERM | Enforces architectural boundaries; explicitly requires Node 22+. |
+| **typescript** | 5.9.3 | SAFE-NEAR-TERM | Stable TS compiler for strict type-checking across workspaces. |
+| **tsx** | 4.23.15 | SAFE-NEAR-TERM | Zero-config TypeScript execution for API server dev mode. |
+| **express** | 4.22.3 | SAFE-NEAR-TERM | Stable Express 4.x for the API workspace. |
+| **@sentry/node** / **@sentry/nextjs** | 11.0.0 | SAFE-NEAR-TERM | Latest stable observability SDK; ESM config compatibility addressed in Week 1. |
+| **@types/node**, **@types/react**, **@types/react-dom**, **@types/express** | matches impl. | SAFE-NEAR-TERM | Pinned to match the implementation versions. |
+| **next** | 14.2.35 | PLAN-UPGRADE-EVALUATE | Contains critical vulns (GHSA-p293-qw3h-jr36). Must upgrade to `15.5.x`. Check React 19 and Sentry compatibility first. |
+| **react** / **react-dom** | 18.3.1 | PLAN-UPGRADE-EVALUATE | Upgrade to React 19 is tightly coupled to the Next.js 15 upgrade. |
+| **eslint** / **eslint-config-next** | 8.57.1 | PLAN-UPGRADE-EVALUATE | v8 is EOL. Upgrade to ESLint 9 is coupled to the Next.js 15 upgrade. |
+| **prisma** / **@prisma/client** | 5.22.0 | PLAN-UPGRADE-EVALUATE | Stable v5 line. Avoids v6 breaking changes for now. Evaluate v6 config changes before upgrade. |
+| **tailwindcss** | 3.4.19 | PLAN-UPGRADE-EVALUATE | Stable 3.x line. Evaluate Tailwind v4 once it is out of alpha. |
+| **postcss** | 8.5.28 | PLAN-UPGRADE-EVALUATE | Tied to Tailwind 3. We applied a `pnpm.overrides` to `>=8.5.23` to patch a path-traversal vulnerability. |

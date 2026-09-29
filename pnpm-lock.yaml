@@ -4,6 +4,9 @@ settings:
   autoInstallPeers: true
   excludeLinksFromLockfile: false
 
+overrides:
+  postcss: '>=8.5.23'
+
 importers:
 
   .:
@@ -13,13 +16,13 @@ importers:
         version: 5.22.0(prisma@5.22.0)
     devDependencies:
       dependency-cruiser:
-        specifier: ^18.4.0
+        specifier: 18.4.0
         version: 18.4.0
       prisma:
         specifier: 5.22.0
         version: 5.22.0
       tsx:
-        specifier: ^4.23.15
+        specifier: 4.23.15
         version: 4.23.15
 
   api:
@@ -35,16 +38,16 @@ importers:
         version: 4.22.3
     devDependencies:
       '@types/express':
-        specifier: ^4.17.21
+        specifier: 4.17.25
         version: 4.17.25
       '@types/node':
-        specifier: ^20.12.7
+        specifier: 20.19.43
         version: 20.19.43
       tsx:
-        specifier: ^4.23.15
+        specifier: 4.23.15
         version: 4.23.15
       typescript:
-        specifier: ^5.4.5
+        specifier: 5.9.3
         version: 5.9.3
 
   web:
@@ -63,28 +66,28 @@ importers:
         version: 18.3.1(react@18.3.1)
     devDependencies:
       '@types/node':
-        specifier: ^20
+        specifier: 20.19.43
         version: 20.19.43
       '@types/react':
-        specifier: ^18
+        specifier: 18.3.31
         version: 18.3.31
       '@types/react-dom':
-        specifier: ^18
+        specifier: 18.3.7
         version: 18.3.7(@types/react@18.3.31)
       eslint:
-        specifier: ^8
+        specifier: 8.57.1
         version: 8.57.1
       eslint-config-next:
         specifier: 14.2.35
         version: 14.2.35(eslint@8.57.1)(typescript@5.9.3)
       postcss:
-        specifier: ^8
+        specifier: '>=8.5.23'
         version: 8.5.28
       tailwindcss:
-        specifier: ^3.4.1
+        specifier: 3.4.19
         version: 3.4.19(tsx@4.23.15)(yaml@2.9.1)
       typescript:
-        specifier: ^5
+        specifier: 5.9.3
         version: 5.9.3
 
 packages:
@@ -2294,20 +2297,20 @@ packages:
     resolution: {integrity: sha512-hpr+J05B2FVYUAXHeK1YyI267J/dDDhMU6B6civm8hSY1jYJnBXxzKDKDswzJmtLHryrjhnDjqqp/49t8FALew==}
     engines: {node: '>=14.0.0'}
     peerDependencies:
-      postcss: ^8.0.0
+      postcss: '>=8.5.23'
 
   postcss-js@4.1.0:
     resolution: {integrity: sha512-oIAOTqgIo7q2EOwbhb8UalYePMvYoIeRY2YKntdpFQXNosSu3vLrniGgmH9OKs/qAkfoj5oB3le/7mINW1LCfw==}
     engines: {node: ^12 || ^14 || >= 16}
     peerDependencies:
-      postcss: ^8.4.21
+      postcss: '>=8.5.23'
 
   postcss-load-config@6.0.1:
     resolution: {integrity: sha512-oPtTM4oerL+UXmx+93ytZVN82RrlY/wPUV8IeDxFrzIjXOLF1pN+EmKPLbubvKHT2HC20xXsCAH2Z+CKV6Oz/g==}
     engines: {node: '>= 18'}
     peerDependencies:
       jiti: '>=1.21.0'
-      postcss: '>=8.0.9'
+      postcss: '>=8.5.23'
       tsx: ^4.8.1
       yaml: ^2.4.2
     peerDependenciesMeta:
@@ -2324,7 +2327,7 @@ packages:
     resolution: {integrity: sha512-HQbt28KulC5AJzG+cZtj9kvKB93CFCdLvog1WFLf1D+xmMvPGlBstkpTEZfK5+AN9hfJocyBFCNiqyS48bpgzQ==}
     engines: {node: '>=12.0'}
     peerDependencies:
-      postcss: ^8.2.14
+      postcss: '>=8.5.23'
 
   postcss-selector-parser@6.1.4:
     resolution: {integrity: sha512-bIoJLOmjCO1S9XdY/DcnR5hJxvrDir1PbGChrzXG3vw0/FOliy/fA3dmdhQ441kah4gKv+TwckGzex6wNS5cnQ==}
@@ -2332,10 +2335,6 @@ packages:
 
   postcss-value-parser@4.2.0:
     resolution: {integrity: sha512-1NNCs6uurfkVbeXG4S8JFT9t19m45ICnif8zWLd5oPSZ50QnwMfK+H3jv408d4jw/7Bttv5axS5IiHoLaVNHeQ==}
-
-  postcss@8.4.31:
-    resolution: {integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ==}
-    engines: {node: ^10 || ^12 || >=14}
 
   postcss@8.5.28:
     resolution: {integrity: sha512-RRuzqDtt5Y9h3quz5hWhK+TPnsmVs6WwSU6LkJMeY4HstUEDuYTG8UJSdawMRzmzAtV+KEoG8N3Qg2qLy5vM/A==}
@@ -4973,7 +4972,7 @@ snapshots:
       busboy: 1.6.0
       caniuse-lite: 1.0.30001812
       graceful-fs: 4.2.11
-      postcss: 8.4.31
+      postcss: 8.5.28
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       styled-jsx: 5.1.1(react@18.3.1)
@@ -5171,12 +5170,6 @@ snapshots:
       util-deprecate: 1.0.2
 
   postcss-value-parser@4.2.0: {}
-
-  postcss@8.4.31:
-    dependencies:
-      nanoid: 3.3.19
-      picocolors: 1.1.1
-      source-map-js: 1.2.1
 
   postcss@8.5.28:
     dependencies:
