@@ -23,6 +23,7 @@ Keep to 1-2 lines normally. Up to 3-4 lines is allowed ONLY for major architectu
 **[NEW] Code Comments Rule:** Strict minimalist commenting. No commenting on the obvious. Comments must be short, precise, and to the point.
 - **Criteria for inclusion:** Only comment *why* something is done if it's a non-obvious business rule, a hack for a known bug, or a complex algorithmic decision.
 - **Never:** Never write a comment and then another comment right after (no chained/redundant comments). Never comment *what* the code is doing (the code itself should explain what it does).
+- **[NEW] Code Modification & Deletion Rule (The "10-Line Rule"):** Every single addition and deletion must be strictly justified. If a task requires 10 lines of code, do not write 100 lines of unnecessary abstractions or bloat. Before deleting *any* code or *any* existing comment, there must be an explicit, articulated reason. Agents and developers must self-audit against this rule before proposing any PR to merge.
 ## 4. Security baseline — v1.0 (rate limits day-1; helmet; CORS allowlist; bcrypt(12); webhook sig verify; npm audit in CI)
 **[NEW] tokenVersion revocation:** Redis key `tv:{uid}` TTL ≤60s; every bump deletes the key in the same
 operation; shared verifySession() in /packages/auth is the ONLY session-verification path (lint-enforced:

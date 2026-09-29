@@ -7,13 +7,14 @@
     "lint": "pnpm --filter web lint",
     "typecheck": "pnpm -r --parallel typecheck",
     "test": "echo \"no test runner configured yet\"",
-    "boundaries": "echo \"dependency-cruiser not configured yet\""
+    "boundaries": "depcruise web api packages"
   },
   "packageManager": "pnpm@9.15.9",
   "dependencies": {
     "@prisma/client": "5.22.0"
   },
   "devDependencies": {
+    "dependency-cruiser": "^18.4.0",
     "prisma": "5.22.0",
     "tsx": "^4.23.15"
   },

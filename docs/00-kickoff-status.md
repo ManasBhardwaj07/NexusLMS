@@ -61,5 +61,6 @@
 - Week 1 Day 4 complete: DB schema audited and locked (v2.1), Neon connection branching workflow proven with synthetic seed data, guardrails codified.
 - Week 1 Day 5 complete: /health endpoint deployed on Express api, proxied by Next.js. Sentry configured for web and api using environment tagging and clean .env practices. Env & secrets conventions codified in rules.
 - Week 1 GATE CHECK: PASS. All services boot concurrently, endpoints work, DB schema verified, placement scripts green, no credential leaks detected, idempotency guards active.
+- Fix-First PR complete: Refactored `api/src/index.ts` to module pattern, added dependency-cruiser gates, fixed proxy hardcoding.
 
 **Next action:** Week 2 Day 1 — Auth setup (consent flow, verify emails).

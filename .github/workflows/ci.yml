@@ -77,7 +77,7 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: ESLint
@@ -97,7 +97,7 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: TypeScript
@@ -117,7 +117,7 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: Unit tests
@@ -137,13 +137,8 @@ jobs:
       - uses: pnpm/action-setup@v4
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - name: Module boundaries (dependency-cruiser)
-        run: |
-          if [ -f .dependency-cruiser.cjs ]; then
-            pnpm boundaries
-          else
-            echo "dependency-cruiser config lands Week 1 Day 3 — skipping until then"
-          fi
+        run: pnpm boundaries
