@@ -9,6 +9,7 @@
     "test": "echo \"no test runner configured yet\"",
     "boundaries": "depcruise web api packages",
     "toolchain-delta": "node scripts/check-toolchain-delta.js",
+    "gate": "sh scripts/check-file-placement.sh && pnpm toolchain-delta && node scripts/check-docs.mjs && pnpm lint && pnpm typecheck && pnpm test && pnpm boundaries && pnpm build",
     "postinstall": "prisma generate"
   },
   "packageManager": "pnpm@9.15.9",

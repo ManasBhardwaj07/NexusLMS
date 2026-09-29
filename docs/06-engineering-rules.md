@@ -55,6 +55,7 @@ Rules must grow with every feature, or they die.
 - **Secrets discipline:** credentials exist only in `.env`; never inline in commands/chat/reports; any exposed credential gets rotated immediately.
 - **Merge authority is human-only:** the agent opens PRs and reports CI status; it never merges.
 - **No amend/force-push on pushed branches without explicit approval** — a fixup commit is the default.
+- **The Pre-Push Ritual:** `pnpm gate` must be green and its output pasted before ANY push is proposed. "It worked locally" without gate output is not evidence.
 - **Prisma/CLI commands:** run only via pinned workspace binaries (`pnpm prisma …`), never unpinned `npx`.
 ## 12. Phase 0–1 Configuration Baselines [NEW]
 These configuration decisions must be enforced as we build out the MVP to prevent rediscovering issues under load:

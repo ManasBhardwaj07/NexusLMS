@@ -26,7 +26,7 @@ Cadence/gates/escalation/freeze/risk register: v1.0 §2–§6 verbatim (unchange
 ## Phase 7 Verification Checklist
 - [ ] Walk the 5 flows as user / attacker / Razorpay-retry-logic against `02-architecture-trd.md`
 - [ ] Name the idempotency anchor of every write path (payments: razorpayPaymentId + webhook_events + Idempotency-Key; progress: @@unique; consent: single-use token; enrollment: partial unique index)
-- [ ] Cross-check every UI screen in `05-uiux-spec.md` against `04-api-contract.md`
+- [ ] Cross-check every UI screen in `05-uiux-spec.md` against `03-api-contract.md`
 - [ ] Confirm no money-as-float anywhere; every admin mutation writes AdminAction
 - [ ] Verify every rule in `06` has an enforcement mechanism (CI, lint, or central wrapper)
 - [ ] Challenge the 70-day figure bottom-up one more time against the Wk table

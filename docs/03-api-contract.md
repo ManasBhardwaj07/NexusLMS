@@ -1,4 +1,4 @@
-# 04 — API Contract v2.0 FINAL
+# 03 — API Contract v2.0 FINAL
 
 Conventions: REST/JSON under `/api/v1` · envelope `{ ok, data | error: { code, message } }` ·
 Auth: `Authorization: Bearer <NextAuth JWT>` · ◆ = accepts `Idempotency-Key` · lists paginated (`?page=&pageSize=`, max 100) ·

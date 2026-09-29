@@ -12,7 +12,7 @@ Compiled 23 Sep 2026 · Personas A (Senior Staff Architect) + B (SDE-3) · Sourc
 | **THIS FILE (MASTER.md)** | Everything, condensed + External Dependencies | ✅ §3 |
 | `01-prd.md` | Product requirements: scope, user stories, NFRs, launch gates, UI/UX spec | ✅ §7 open decisions |
 | `02-architecture-trd.md` | Systems design: topology, auth, payments, video, live, minors data-flow | (decision notes only) |
-| `04-api-contract.md` | Every endpoint, auth, idempotency, error codes | ❌ |
+| `03-api-contract.md` | Every endpoint, auth, idempotency, error codes | ❌ |
 | `05-uiux-spec.md` | Pages, components, states, tokens, minors screens | ✅ palette decision |
 | `06-engineering-rules.md` | Code/git/test/security/freeze/placement rules (living doc) | ❌ |
 | `07-execution-plan.md` | Week 1–15 plan, gates, buffer accounting, achievement log, launch checklists | ✅ external dependency column |

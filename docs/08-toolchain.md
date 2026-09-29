@@ -20,6 +20,7 @@ This document is the **single source of truth** for the toolchain. To verify thi
 | **express** | 4.22.3 | SAFE-NEAR-TERM | Stable Express 4.x for the API workspace. |
 | **@sentry/node** / **@sentry/nextjs** | 11.0.0 | SAFE-NEAR-TERM | Latest stable observability SDK; ESM config compatibility addressed in Week 1. |
 | **@types/node**, **@types/react**, **@types/react-dom**, **@types/express** | matches impl. | SAFE-NEAR-TERM | Pinned to match the implementation versions. |
+| **@types/node** (runtime Node 24) | 22.x / Node 24 | PLAN-UPGRADE-EVALUATE | Currently types target v22 while runtime engine is Node 24; evaluate bump once Node 24 types stabilize. |
 | **next** | 15.5.26 | SAFE-NEAR-TERM | Next 15 upgrade cleared all critical RCEs from the v14 line. |
 | **react** / **react-dom** | 19.3.0 | SAFE-NEAR-TERM | Bumped explicitly to satisfy Next.js 15 requirements. |
 | **eslint** / **eslint-config-next** | 8.57.1 / 15.5.26 | PLAN-UPGRADE-EVALUATE | eslint 8 kept to avoid Flat Config rewrite blockers; config-next bumped. |
