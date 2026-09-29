@@ -1,4 +1,7 @@
+import path from 'path';
+
 const nextConfig = {
+  outputFileTracingRoot: path.join(process.cwd(), '../'),
   async rewrites() {
     return [
       {

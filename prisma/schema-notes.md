@@ -14,7 +14,7 @@
 - ParentalConsent tokens: single-use, 48h expiry, IP + user agent stored as evidence.
 - tokenVersion caching: Redis key `tv:{userId}`, TTL ≤60s; bump must delete the key in the same operation.
 
-## v2.1 fixes (09-blind-spot-review §6 sync — applied 24 Sep 2026)
+## v2.1 fixes (Phase 7 checklist sync — applied 24 Sep 2026)
 - `ParentalConsent.token` renamed to `tokenHash` — bcrypt-hashed at rest; plaintext lives only in the emailed link.
 - `Coupon.usedCount` annotated as a **cached counter only** — source of truth for maxUses enforcement is `COUNT(CouponRedemption)` inside the same transaction as the new redemption insert. Never skip the txn-level count.
 - `WebhookEvent.relatedOrderId` (nullable String) added — fast FK for reconciliation lookups. Not enforced as a FK at DB level (webhook can arrive before order is confirmed) but populated by the webhook handler.

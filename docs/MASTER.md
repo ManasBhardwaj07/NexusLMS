@@ -10,15 +10,13 @@ Compiled 23 Sep 2026 · Personas A (Senior Staff Architect) + B (SDE-3) · Sourc
 | File | Contains | Has external items? |
 | --- | --- | --- |
 | **THIS FILE (MASTER.md)** | Everything, condensed + External Dependencies | ✅ §3 |
-| `00-kickoff-status.md` | One-page status: locked / pending / external dependencies / day-1 checklist / legal + achievement log | ✅ 🟡+🔴 sections |
-| `01-prd.md` | Product requirements: scope, user stories, NFRs, launch gates | ✅ §7 open decisions |
+| `01-prd.md` | Product requirements: scope, user stories, NFRs, launch gates, UI/UX spec | ✅ §7 open decisions |
 | `02-architecture-trd.md` | Systems design: topology, auth, payments, video, live, minors data-flow | (decision notes only) |
 | `04-api-contract.md` | Every endpoint, auth, idempotency, error codes | ❌ |
 | `05-uiux-spec.md` | Pages, components, states, tokens, minors screens | ✅ palette decision |
 | `06-engineering-rules.md` | Code/git/test/security/freeze/placement rules (living doc) | ❌ |
-| `07-execution-plan.md` | Week 1–15 plan, gates, buffer accounting | ✅ external dependency column |
-| `09-blind-spot-review.md` | Part B: external reviewer checklist (live Phase 7 gate) | ❌ |
-| `10-launch-checklist.md` | FINAL Wk1+Wk2 day-by-day task lists (risks in MASTER §12; changelog = git log) | (risks reference external items) |
+| `07-execution-plan.md` | Week 1–15 plan, gates, buffer accounting, achievement log, launch checklists | ✅ external dependency column |
+| `11-toolchain.md` | Toolchain versions and Next 15 impacts | ❌ |
 | *(prisma/)* `schema.prisma` + `schema-notes.md` | Full data model + migration rules + seed plan | ❌ |
 | *(skills/)* `product-readiness-audit/SKILL.md` | Phase-7 product readiness audit runbook & checklist mirror (09 Part B) | ❌ |
 | *(external)* Decision Audit v1.1 | Architectural rationale record | ❌ |
@@ -132,6 +130,8 @@ sends from Wk3.
 ~$2k/mo + progress write pressure → 60s batching + read replica. None change v1 architecture.
 **Known v1 limitations (documented, deliberate):** YouTube Live trade-offs · manual ingest · no DRM (signed URLs +
 watermark; screen-recording unstoppable at this tier — known tradeoff) · minors = no analytics by law.
+
+**Known Deltas:** All v1.0–v2.0 gaps patched; fixes live in `prisma/schema.prisma` (actorType, tokenHash, relatedOrderId), `prisma/schema-notes.md` v2.1, and `docs/06-engineering-rules.md` §9/§11.
 
 ---
 

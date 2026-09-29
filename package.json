@@ -8,7 +8,8 @@
     "typecheck": "pnpm -r --parallel typecheck",
     "test": "echo \"no test runner configured yet\"",
     "boundaries": "depcruise web api packages",
-    "toolchain-delta": "node scripts/check-toolchain-delta.js"
+    "toolchain-delta": "node scripts/check-toolchain-delta.js",
+    "postinstall": "prisma generate"
   },
   "packageManager": "pnpm@9.15.9",
   "engines": {

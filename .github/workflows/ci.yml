@@ -20,12 +20,17 @@ jobs:
         run: |
           test -f docs/MASTER.md || (echo "docs/MASTER.md missing" && exit 1)
           test -f docs/01-prd.md || (echo "docs/01-prd.md missing" && exit 1)
+          test -f docs/02-architecture-trd.md || (echo "docs/02-architecture-trd.md missing" && exit 1)
+          test -f docs/04-api-contract.md || (echo "docs/04-api-contract.md missing" && exit 1)
+          test -f docs/05-uiux-spec.md || (echo "docs/05-uiux-spec.md missing" && exit 1)
           test -f docs/06-engineering-rules.md || (echo "docs/06-engineering-rules.md missing" && exit 1)
-      - name: Docs cap (11, one-in-one-out)
+          test -f docs/07-execution-plan.md || (echo "docs/07-execution-plan.md missing" && exit 1)
+          test -f docs/11-toolchain.md || (echo "docs/11-toolchain.md missing" && exit 1)
+      - name: Docs cap (8, one-in-one-out)
         run: |
           n=$(git ls-files 'docs/*.md' | wc -l)
-          echo "docs/ contains $n files (cap: 11)"
-          test "$n" -le 11 || (echo "FAIL: docs/ over cap — merge or remove a doc first" && exit 1)
+          echo "docs/ contains $n files (cap: 8)"
+          test "$n" -le 8 || (echo "FAIL: docs/ over cap — merge or remove a doc first" && exit 1)
 
   placement:
     runs-on: ubuntu-latest

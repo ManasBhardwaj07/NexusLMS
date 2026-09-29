@@ -24,10 +24,10 @@ if ($rootProseCount -gt 3) {
     $fail = $true
 }
 
-# 4. Docs cap: 11 files, one-in-one-out
+# 4. Docs cap: 8 files, one-in-one-out
 $docsCount = (git ls-files 'docs/*.md').Count
-if ($docsCount -gt 11) {
-    Write-Host "FAIL: docs/ has $docsCount files (cap 11 - merge or remove one first)"
+if ($docsCount -gt 8) {
+    Write-Host "FAIL: docs/ has $docsCount files (cap 8 - merge or remove one first)"
     $fail = $true
 }
 

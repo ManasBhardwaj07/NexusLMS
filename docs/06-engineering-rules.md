@@ -43,7 +43,7 @@ Rules must grow with every feature, or they die.
 - **AI Code Path:** AI-generated code follows the CODE PATH in `.agents/rules` — the PR 'Skills run' checkbox is the enforcement point (CI cannot run judgment).
 - **PR Rules Delta:** Every feature/fix PR must include a "Rules" section answering: what new invariant does this code create? Add it to this file or the PR template Step 0 checklist (or justify none).
 - **Runbooks:** Every new integration (3rd-party SDK, provider) must add a short runbook stub in `docs/runbooks/`.
-- **Quarterly Audit:** Run `/skills/product-readiness-audit/SKILL.md` (checklist mirror: `09-blind-spot-review.md` Part B) quarterly or at Phase 7.
+- **Quarterly Audit:** Run `/skills/product-readiness-audit/SKILL.md` (checklist mirror: `07-execution-plan.md` annex) quarterly or at Phase 7.
 - **Skills Cap Rule:** `skills/` holds only skills invoked by a gate or phase (current: 1). A new skill requires naming the gate that invokes it.
 - **Placement Law:** Executable artifacts (schema, configs, workflows) live in functional folders (`prisma/`, `.github/`, `web/`, `api/`, `packages/`); `docs/` holds prose/decisions/plans ONLY and never duplicates code. Root = prose/config max 3 (`README.md`, `.gitignore`, `.editorconfig`) + functional workspace dirs.
 - **Git Status:** `git status` must be clean before any PR.
@@ -51,7 +51,7 @@ Rules must grow with every feature, or they die.
 - **Pointer-file rule:** A pointer file (a `.md` whose only purpose is linking to another file) must stay under ~10 lines. If it grows past that, merge its content into the target file.
 - **`.gitkeep` expiry:** A `.gitkeep`-only folder is acceptable only *before* that folder's phase has started. Past the phase gate, an empty skeleton is a missing-work signal.
 - **No new file for a structural decision:** When a new invariant, process rule, or state record is created — add a section to the existing file that owns that topic. A new file is only justified if no existing file owns the topic AND the content would be orphaned if merged. When in doubt: section, not file.
-- **docs/ cap:** `docs/` is capped at 11 files — one-in-one-out, no exceptions without amending this rule.
+- **docs/ cap:** `docs/` is capped at 8 files — one-in-one-out, no exceptions without amending this rule.
 - **Secrets discipline:** credentials exist only in `.env`; never inline in commands/chat/reports; any exposed credential gets rotated immediately.
 - **Merge authority is human-only:** the agent opens PRs and reports CI status; it never merges.
 - **No amend/force-push on pushed branches without explicit approval** — a fixup commit is the default.

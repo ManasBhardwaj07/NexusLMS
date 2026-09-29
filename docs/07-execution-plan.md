@@ -18,3 +18,37 @@ Estimate: 63 build days + 9 buffer days = **72 working days / 15 weeks**. (Timel
 
 Critical path unchanged: KYC (Wk1) → Wk2 decisions → content (Wk4) → legal (Wk12).
 Cadence/gates/escalation/freeze/risk register: v1.0 §2–§6 verbatim (unchanged and still binding).
+
+## Gate Criteria Details
+- **Week 1 GATE:** boots in 1 cmd, CI green, migration clean.
+- **Week 2 GATE:** both signup paths + consent flow + guards + rate limits green in CI. (Record Wk2 policy decisions: GST + refund policy + minors posture).
+
+## Phase 7 Verification Checklist
+- [ ] Walk the 5 flows as user / attacker / Razorpay-retry-logic against `02-architecture-trd.md`
+- [ ] Name the idempotency anchor of every write path (payments: razorpayPaymentId + webhook_events + Idempotency-Key; progress: @@unique; consent: single-use token; enrollment: partial unique index)
+- [ ] Cross-check every UI screen in `05-uiux-spec.md` against `04-api-contract.md`
+- [ ] Confirm no money-as-float anywhere; every admin mutation writes AdminAction
+- [ ] Verify every rule in `06` has an enforcement mechanism (CI, lint, or central wrapper)
+- [ ] Challenge the 70-day figure bottom-up one more time against the Wk table
+- [ ] The honesty test: anything you'd be embarrassed to explain in a month-3 review or interview?
+
+## Achievement Log
+*Running record — update every Friday; feeds the weekly progress update.*
+
+**24 Sep 2026:**
+- Repo live, branch protection + CI enforced, planning pack committed.
+- Restored repo to exact Day-1 state (docs/ pack, skeleton dirs, bootstrap CI, NO code).
+- Configured CODEOWNERS with repo lead and business handles.
+- Documented external dependency requirements F-1 to F-4.
+- Applied v2.1 schema fixes (tokenHash, actorType, relatedOrderId, usedCount annotation).
+- Repo finalization: 6 files removed/merged/archived, docs at 11-file cap, structure locked.
+- 24 Sep — skills restored as Phase-7 runbook (full text), real CI gates live (docs cap, placement law, secrets enforced on every PR), branch protection updated. Repo infrastructure complete.
+
+**28 Sep 2026:**
+- Week 1 Day 4 complete: DB schema audited and locked (v2.1), Neon connection branching workflow proven with synthetic seed data, guardrails codified.
+- Week 1 Day 5 complete: /health endpoint deployed on Express api, proxied by Next.js. Sentry configured for web and api using environment tagging and clean .env practices. Env & secrets conventions codified in rules.
+- Week 1 GATE CHECK: PASS. All services boot concurrently, endpoints work, DB schema verified, placement scripts green, no credential leaks detected, idempotency guards active.
+- Fix-First PR complete: Refactored `api/src/index.ts` to module pattern, added dependency-cruiser gates, fixed proxy hardcoding.
+
+**29 Sep 2026:**
+- Next 15 migration committed and merged (0 critical/0 high); docs consolidated 12→8 per section-not-file; dependency churn, toolchain drift, and docs bloat all structurally closed in one day.

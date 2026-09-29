@@ -53,4 +53,4 @@ scripts/              CI and build scripts
 
 ## Timeline
 
-15-week solo build. Current status tracked in `docs/00-kickoff-status.md`.
+15-week solo build. Current status tracked in `docs/07-execution-plan.md`.

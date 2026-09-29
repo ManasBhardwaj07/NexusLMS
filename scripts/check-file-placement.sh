@@ -24,10 +24,10 @@ if [ "$root_prose" -gt 3 ]; then
   fail=1
 fi
 
-# 4. Docs cap: 11 files, one-in-one-out
+# 4. Docs cap: 8 files, one-in-one-out
 docs_count=$(git ls-files 'docs/*.md' | wc -l)
-if [ "$docs_count" -gt 11 ]; then
-  echo "FAIL: docs/ has $docs_count files (cap 11 — merge or remove one first)"
+if [ "$docs_count" -gt 8 ]; then
+  echo "FAIL: docs/ has $docs_count files (cap 8 — merge or remove one first)"
   fail=1
 fi
 

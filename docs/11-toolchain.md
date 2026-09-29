@@ -20,9 +20,11 @@ This document is the **single source of truth** for the toolchain. To verify thi
 | **express** | 4.22.3 | SAFE-NEAR-TERM | Stable Express 4.x for the API workspace. |
 | **@sentry/node** / **@sentry/nextjs** | 11.0.0 | SAFE-NEAR-TERM | Latest stable observability SDK; ESM config compatibility addressed in Week 1. |
 | **@types/node**, **@types/react**, **@types/react-dom**, **@types/express** | matches impl. | SAFE-NEAR-TERM | Pinned to match the implementation versions. |
-| **next** | 14.2.35 | PLAN-UPGRADE-EVALUATE | Contains critical vulns (GHSA-p293-qw3h-jr36). Must upgrade to `15.5.x`. Check React 19 and Sentry compatibility first. |
-| **react** / **react-dom** | 18.3.1 | PLAN-UPGRADE-EVALUATE | Upgrade to React 19 is tightly coupled to the Next.js 15 upgrade. |
-| **eslint** / **eslint-config-next** | 8.57.1 | PLAN-UPGRADE-EVALUATE | v8 is EOL. Upgrade to ESLint 9 is coupled to the Next.js 15 upgrade. |
+| **next** | 15.5.26 | SAFE-NEAR-TERM | Next 15 upgrade cleared all critical RCEs from the v14 line. |
+| **react** / **react-dom** | 19.3.0 | SAFE-NEAR-TERM | Bumped explicitly to satisfy Next.js 15 requirements. |
+| **eslint** / **eslint-config-next** | 8.57.1 / 15.5.26 | PLAN-UPGRADE-EVALUATE | eslint 8 kept to avoid Flat Config rewrite blockers; config-next bumped. |
 | **prisma** / **@prisma/client** | 5.22.0 | PLAN-UPGRADE-EVALUATE | Stable v5 line. Avoids v6 breaking changes for now. Evaluate v6 config changes before upgrade. |
 | **tailwindcss** | 3.4.19 | PLAN-UPGRADE-EVALUATE | Stable 3.x line. Evaluate Tailwind v4 once it is out of alpha. |
 | **postcss** | 8.5.28 | PLAN-UPGRADE-EVALUATE | Tied to Tailwind 3. We applied a `pnpm.overrides` to `>=8.5.23` to patch a path-traversal vulnerability. |
+
+*(Note: Next 15.5.26 + React 19.3.0 adopted 29 Sep via protocol run; RCE-class CVEs cleared, resolving the prior Next 14 vulnerability).*
