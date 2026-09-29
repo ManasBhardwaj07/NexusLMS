@@ -16,7 +16,7 @@ Compiled 23 Sep 2026 · Personas A (Senior Staff Architect) + B (SDE-3) · Sourc
 | `05-uiux-spec.md` | Pages, components, states, tokens, minors screens | ✅ palette decision |
 | `06-engineering-rules.md` | Code/git/test/security/freeze/placement rules (living doc) | ❌ |
 | `07-execution-plan.md` | Week 1–15 plan, gates, buffer accounting, achievement log, launch checklists | ✅ external dependency column |
-| `11-toolchain.md` | Toolchain versions and Next 15 impacts | ❌ |
+| `08-toolchain.md` | Toolchain versions and Next 15 impacts | ❌ |
 | *(prisma/)* `schema.prisma` + `schema-notes.md` | Full data model + migration rules + seed plan | ❌ |
 | *(skills/)* `product-readiness-audit/SKILL.md` | Phase-7 product readiness audit runbook & checklist mirror (09 Part B) | ❌ |
 | *(external)* Decision Audit v1.1 | Architectural rationale record | ❌ |

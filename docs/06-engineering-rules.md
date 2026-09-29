@@ -62,7 +62,7 @@ These configuration decisions must be enforced as we build out the MVP to preven
 2. **Performance:** Catalog/course-detail pages must be cached (ISR or edge-cache on Vercel), not re-rendered per request.
 3. **Rate Limits:** Must be scoped per-user/IP, not global.
 4. **Workers:** BullMQ workers must have an explicit concurrency setting, not rely on the default.
-5. **Toolchain Source of Truth:** Versions live in `package.json` (engines, packageManager), `.nvmrc`, and the lockfile. CI reads `.nvmrc`. Any toolchain change = one atomic PR touching all three + docs/11, with human approval.
+5. **Toolchain Source of Truth:** Versions live in `package.json` (engines, packageManager), `.nvmrc`, and the lockfile. CI reads `.nvmrc`. Any toolchain change = one atomic PR touching all three + docs/08, with human approval.
 6. **No Dependency Churn to fix CI:** Dependencies are never version-bumped to fix CI. A version-caused CI failure is a TOOLCHAIN problem: fix the declaration (engines/.nvmrc/lockfile), or escalate to the human with evidence. Changing a dependency's version requires explicit human approval with a stated reason — 'CI was red' is never a sufficient reason.
 7. **Clean Room Proof:** Any toolchain PR must include evidence that a clean checkout (`corepack enable` → `pnpm install --frozen-lockfile`) runs all gates green on the declared Node version.
 8. **Migration & CLI Interactive Safety:** Interactive inputs (e.g. `y`, `yes`, or arbitrary keystrokes) must NEVER be piped blindly into CLI prompts. If a migration or CLI command prompts unexpectedly for naming or drift consent, immediately abort, inspect the drift via `git diff` or database query, and resolve root cause before proceeding.

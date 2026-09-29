@@ -25,7 +25,7 @@ jobs:
           test -f docs/05-uiux-spec.md || (echo "docs/05-uiux-spec.md missing" && exit 1)
           test -f docs/06-engineering-rules.md || (echo "docs/06-engineering-rules.md missing" && exit 1)
           test -f docs/07-execution-plan.md || (echo "docs/07-execution-plan.md missing" && exit 1)
-          test -f docs/11-toolchain.md || (echo "docs/11-toolchain.md missing" && exit 1)
+          test -f docs/08-toolchain.md || (echo "docs/08-toolchain.md missing" && exit 1)
       - name: Docs cap (8, one-in-one-out)
         run: |
           n=$(git ls-files 'docs/*.md' | wc -l)
