@@ -48,7 +48,7 @@
 - [ ] Skills run: [ ] agents-rules [ ] security (api/prisma changes) [ ] docs/06 rules delta recorded
 - [ ] Within frozen v1 scope (if not: v2 backlog or written timeline re-quote)
 - [ ] No `.env` files, API keys, tokens, or PII in `git diff`
-- [ ] Achievement log updated in `docs/00-kickoff-status.md`
+- [ ] Achievement log updated in `docs/07-execution-plan.md`
 
 **API, Prisma, or Payments PRs only:**
 
