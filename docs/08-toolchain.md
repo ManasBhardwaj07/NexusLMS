@@ -20,7 +20,9 @@ This document is the **single source of truth** for the toolchain. To verify thi
 | **express** | 4.22.3 | SAFE-NEAR-TERM | Stable Express 4.x for the API workspace. |
 | **@sentry/node** / **@sentry/nextjs** | 11.0.0 | SAFE-NEAR-TERM | Latest stable observability SDK; ESM config compatibility addressed in Week 1. |
 | **@types/node**, **@types/react**, **@types/react-dom**, **@types/express** | matches impl. | SAFE-NEAR-TERM | Pinned to match the implementation versions. |
-| **@types/node** (runtime Node 24) | 20.19.43 / Node 24 | PLAN-UPGRADE-EVALUATE | Currently types target v20 (20.19.43) while runtime engine is Node 24; evaluate bump once Node 24 types stabilize. |
+| **@types/node** (runtime Node 24) | 20.19.43 / Node 24 | PLAN-UPGRADE-EVALUATE | Currently types target v20 (20.19.43); evaluate bump once Node 24 types stabilize. @types/node now also in packages/auth (clean-room fix). |
+| **@typescript-eslint/parser** | 8.71.0 | SAFE-NEAR-TERM | Pinned parser for TypeScript AST linting in api and packages/auth workspaces. |
+| **@typescript-eslint/eslint-plugin** | 8.71.0 | SAFE-NEAR-TERM | Pinned lint rules for TypeScript in api and packages/auth workspaces. |
 | **next** | 15.5.26 | SAFE-NEAR-TERM | Next 15 upgrade cleared all critical RCEs from the v14 line. |
 | **react** / **react-dom** | 19.3.0 | SAFE-NEAR-TERM | Bumped explicitly to satisfy Next.js 15 requirements. |
 | **eslint** / **eslint-config-next** | 8.57.1 / 15.5.26 | PLAN-UPGRADE-EVALUATE | eslint 8 kept to avoid Flat Config rewrite blockers; config-next bumped. |

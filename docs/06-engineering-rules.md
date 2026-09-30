@@ -35,7 +35,7 @@ replay/single-use), minor-gating middleware matrix (PENDING vs VERIFIED × learn
 ## 8. Runbooks — v1.0 + **[NEW] minors-data-request (parent deletion/export handling)**
 ## 9. Never-do list — v1.0 (9 items) + **[NEW] never accept isMinor/consentState from clients (server-derived only);
 never fire analytics outside track(); never store parent verification tokens unhashed-at-rest beyond their 48h life
-(tokens hashed in DB, plaintext only in the emailed link)**
+(tokens hashed in DB, plaintext only in the emailed link); never append to files with `echo >>` on Windows (writes UTF-16 with null bytes; edit files with the editor, not shell redirection)**
 ## 10. Scope freeze & change control — v1.0 verbatim (3 legitimate breaks; v2 backlog default; 24h written impact replies)
 
 ## 11. Living Rules Protocol [NEW]
@@ -44,7 +44,7 @@ Rules must grow with every feature, or they die.
 - **PR Rules Delta:** Every feature/fix PR must include a "Rules" section answering: what new invariant does this code create? Add it to this file or the PR template Step 0 checklist (or justify none).
 - **Runbooks:** Every new integration (3rd-party SDK, provider) must add a short runbook stub in `docs/runbooks/`.
 - **Quarterly Audit:** Run `/skills/product-readiness-audit/SKILL.md` (checklist mirror: `07-execution-plan.md` annex) quarterly or at Phase 7.
-- **Skills Cap Rule:** `skills/` holds only skills invoked by a gate or phase (current: 1). A new skill requires naming the gate that invokes it.
+- **Skills Cap Rule:** `skills/` holds only skills invoked by a gate or phase (current: 2). A new skill requires naming the gate that invokes it.
 - **Placement Law:** Executable artifacts (schema, configs, workflows) live in functional folders (`prisma/`, `.github/`, `web/`, `api/`, `packages/`); `docs/` holds prose/decisions/plans ONLY and never duplicates code. Root = prose/config max 3 (`README.md`, `.gitignore`, `.editorconfig`) + functional workspace dirs.
 - **Git Status:** `git status` must be clean before any PR.
 - **Folder README rule:** A folder gets a README only if it explains something not covered by the root README or the docs pack. Empty skeleton folders never get READMEs. If a folder's contents become self-explanatory, the README gets deleted, not updated forever.
@@ -70,6 +70,7 @@ These configuration decisions must be enforced as we build out the MVP to preven
 8. **Migration & CLI Interactive Safety:** Interactive inputs (e.g. `y`, `yes`, or arbitrary keystrokes) must NEVER be piped blindly into CLI prompts. If a migration or CLI command prompts unexpectedly for naming or drift consent, immediately abort, inspect the drift via `git diff` or database query, and resolve root cause before proceeding.
 9. **Schema & Migration Pre-flight:** Before executing migrations, validate the schema with `npx prisma validate` and `npx prisma format`. Raw SQL migrations must strictly adhere to the Minimalist Commenting Rule (§3: comment only non-obvious business invariants, never comment what the SQL syntax does).
 10. **Config & Env Integrity:** `.env` and `.env.*` files must be verified for syntax (balanced quotes, valid connection strings) before executing commands that load them.
+11. **Clean-Room Type Isolation Law:** Type resolution (`@types/`) is strictly quarantined per workspace using `typeRoots`. Workspaces must explicitly declare and install their own types. The global environment must never leak types into CI or build processes. Enforced by `pnpm cleanroom` gate (`tsc --listFiles`). *v1 scans @types roots only; module-resolution leaks (e.g. buffer) are a known accepted gap; trigger: revisit if CI ever diverges again.*
 
 ## 13. Env & Secrets Conventions [NEW]
 - **Single Source of Truth:** `.env` is the ONLY home for secrets and environment-specific values.

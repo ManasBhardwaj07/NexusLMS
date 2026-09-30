@@ -52,3 +52,6 @@ Cadence/gates/escalation/freeze/risk register: v1.0 §2–§6 verbatim (unchange
 
 **29 Sep 2026:**
 - Next 15 migration committed and merged (0 critical/0 high); docs consolidated 12→8 per section-not-file; dependency churn, toolchain drift, and docs bloat all structurally closed in one day.
+
+**30 Sep 2026:**
+- Clean-Room Type Isolation Law implemented: quarantined `@types` using `typeRoots` and enforced via `tsc --listFiles` in `check-cleanroom.js` gate. Accepted gap documented for module-resolution leaks.

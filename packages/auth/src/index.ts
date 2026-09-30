@@ -1,10 +1,22 @@
-export type SessionPayload = {
-  uid: string;
-  role: 'STUDENT' | 'MENTOR' | 'ADMIN';
-  tv: number;
-};
+export type {
+  Role,
+  ConsentState,
+  SessionPayload,
+  UserMeta,
+  VerifySessionFailureReason,
+  VerifySessionResult,
+} from './types.js';
 
-export type UserMeta = {
-  isMinor: boolean;
-  consentState: 'NOT_REQUIRED' | 'PENDING' | 'VERIFIED';
-};
+export { verifySession } from './crypto.js';
+
+export {
+  CACHE_TTL_SECONDS,
+  getTv,
+  setTv,
+  invalidateTv,
+  getUserMeta,
+  setUserMeta,
+  invalidateUserMeta,
+} from './cache.js';
+
+export { getRedisClient, resetRedisClient } from './redis.js';
