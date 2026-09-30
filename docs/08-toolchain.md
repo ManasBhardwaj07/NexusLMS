@@ -27,5 +27,12 @@ This document is the **single source of truth** for the toolchain. To verify thi
 | **prisma** / **@prisma/client** | 5.22.0 | PLAN-UPGRADE-EVALUATE | Stable v5 line. Avoids v6 breaking changes for now. Evaluate v6 config changes before upgrade. |
 | **tailwindcss** | 3.4.19 | PLAN-UPGRADE-EVALUATE | Stable 3.x line. Evaluate Tailwind v4 once it is out of alpha. |
 | **postcss** | 8.5.28 | PLAN-UPGRADE-EVALUATE | Tied to Tailwind 3. We applied a `pnpm.overrides` to `>=8.5.23` to patch a path-traversal vulnerability. |
+| **next-auth** | 5.0.0-beta.32 | PLAN-UPGRADE-EVALUATE | Auth.js v5 for Next 15 / React 19 App Router; beta line; Clerk fallback is the risk valve. |
+| **@auth/prisma-adapter** | ^2.11.3 | SAFE-NEAR-TERM | Prisma adapter for NextAuth v5; peer requirement satisfied: `@prisma/client >=5` (5.22.0). |
+| **bcrypt** | ^6.0.0 | SAFE-NEAR-TERM | Password hashing in Node runtime (API credentials path only; excluded from Edge middleware). |
+| **@types/bcrypt** | 6.0.0 | SAFE-NEAR-TERM | Pinned exact tooling/type definitions matching bcrypt 6.0.0. |
+| **jose** | ^6.2.12 | SAFE-NEAR-TERM | Universal Edge/Node portable JWE/JWT decryption for shared `verifySession()`. |
+| **@upstash/redis** | ^1.39.0 | SAFE-NEAR-TERM | Serverless REST/HTTP Redis client for token revocation (`tv:{uid}`), metadata cache, and rate limiting. |
+| **vitest** | 5.0.2 | SAFE-NEAR-TERM | Fast unit test runner; pinned exact tooling dep; Node engine requirement `^24.0.0` satisfied by Node 24.12.0. |
 
 *(Note: Next 15.5.26 + React 19.3.0 adopted 29 Sep via protocol run; RCE-class CVEs cleared, resolving the prior Next 14 vulnerability).*
