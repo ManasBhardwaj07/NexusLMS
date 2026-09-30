@@ -27,7 +27,7 @@ Compiled 23 Sep 2026 · Personas A (Senior Staff Architect) + B (SDE-3) · Sourc
 
 CodeAscend (QAVRYN's edtech brand) sells 2 competitive-programming courses online: catalog → free preview →
 embedded Razorpay checkout → auto-enrollment → recorded video library + live classes. One solo developer.
-72 working days / 15 weeks to production. Budget-conscious. Audience skews 16–18 (minors — DPDP applies).
+70 working days / 14 weeks (63 build + 7 buffer) to production. Budget-conscious. Audience skews 16–18 (minors — DPDP applies).
 Live classes v1 = YouTube Live + manual recording ingest (full SDK = v1.1 after cohort 1).
 Success = first cohort runs end-to-end + real payments flow with monitoring — not feature count.
 
@@ -37,7 +37,7 @@ Success = first cohort runs end-to-end + real payments flow with monitoring — 
 
 1. **Stack:** Next.js 14 App Router · Express (not NestJS) · Neon Postgres + Prisma · Upstash Redis + BullMQ ·
 Vercel (web) + Render (API + worker) · Cloudflare Stream · Razorpay · Resend · Sentry. Monorepo, pnpm workspaces.
-2. **Timeline:** 72 working days / 15 weeks (63 build + 9 buffer). Scope rejection of YouTube-Live → 16 weeks.
+2. **Timeline:** 70 working days / 14 weeks (63 build + 7 buffer). Scope rejection of YouTube-Live → 16 weeks.
 3. **Live v1:** unlisted YouTube Live, rotated dashboard-gated links (never emailed raw), manual same-day VOD ingest.
 v1.1 SDK (100ms vs Cloudflare RealtimeKit spike at Wk9) after cohort 1.
 4. **Auth:** one NextAuth JWT (JWE, 15-min sliding) `{uid, role, tv}`; shared `jose` verifySession() used by BOTH

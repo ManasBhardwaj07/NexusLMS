@@ -1,6 +1,6 @@
-# 07 — Master Execution Plan v2.0 FINAL — Week 1–15 (solo dev)
+# 07 — Master Execution Plan v2.0 FINAL — Week 1–14 (solo dev)
 
-Estimate: 63 build days + 9 buffer days = **72 working days / 15 weeks**. (Timeline adjusted to 15 weeks to accommodate real-world blockers without micromanaging buffer days. 16 weeks acceptable if major blockers occur).
+Estimate: 63 build days + 7 buffer days = **70 working days / 14 weeks (63 build + 7 buffer)**.
 
 | Wk | Focus | Milestone / Output | Gate (binary) | External dependency (late by X → Y) |
 |---|---|---|---|---|

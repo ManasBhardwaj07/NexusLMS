@@ -78,6 +78,7 @@ model User {
   isMinor         Boolean   @default(false) // derived at DOB capture (<18); never flipped back by user
   trackingConsent Boolean   @default(false) // GA4/funnel events only if true AND !isMinor
   consentState    String    @default("NOT_REQUIRED") // NOT_REQUIRED | PENDING | VERIFIED
+  consentAt       DateTime?
   createdAt       DateTime  @default(now())
   updatedAt       DateTime  @updatedAt
 
