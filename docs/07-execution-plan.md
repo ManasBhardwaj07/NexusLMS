@@ -55,3 +55,7 @@ Cadence/gates/escalation/freeze/risk register: v1.0 §2–§6 verbatim (unchange
 
 **30 Sep 2026:**
 - Clean-Room Type Isolation Law implemented: quarantined `@types` using `typeRoots` and enforced via `tsc --listFiles` in `check-cleanroom.js` gate. Accepted gap documented for module-resolution leaks.
+
+**1 Oct 2026:**
+- API auth layer complete (Commits C-0 to C-5): Full authentication spine operational with cryptographic JWE session verification, Upstash Redis ZSET sliding-window rate limiting, DPDP §9 verifiable parental consent module (token lifecycle, single-use transactional verification, real-time cache unlock), and live curl transcripts across 401/403/200/429 scenarios.
+- C-5 falsified Commit B's JWE validation via live evidence (RFC 7516 §7.1) — transcripts proved what typecheck asserted.
