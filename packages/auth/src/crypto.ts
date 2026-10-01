@@ -37,7 +37,14 @@ export async function verifySession(
 
     const trimmed = token.trim();
     const parts = trimmed.split('.');
-    if (parts.length !== 5 || parts.some((p) => p.length === 0)) {
+    // RFC 7516 §7.1: In direct encryption (alg: "dir"), parts[1] (encrypted key) is empty.
+    if (
+      parts.length !== 5 ||
+      parts[0].length === 0 ||
+      parts[2].length === 0 ||
+      parts[3].length === 0 ||
+      parts[4].length === 0
+    ) {
       return { ok: false, reason: 'malformed' };
     }
 

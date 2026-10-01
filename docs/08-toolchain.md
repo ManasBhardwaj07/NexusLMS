@@ -36,5 +36,6 @@ This document is the **single source of truth** for the toolchain. To verify thi
 | **jose** | ^6.2.12 | SAFE-NEAR-TERM | Universal Edge/Node portable JWE/JWT decryption for shared `verifySession()`. |
 | **@upstash/redis** | ^1.39.0 | SAFE-NEAR-TERM | Serverless REST/HTTP Redis client for token revocation (`tv:{uid}`), metadata cache, and rate limiting. |
 | **vitest** | 5.0.2 | SAFE-NEAR-TERM | Fast unit test runner; pinned exact tooling dep; Node engine requirement `^24.0.0` satisfied by Node 24.12.0. |
+| **zod** | ^3.24.2 | SAFE-NEAR-TERM | Schema validation at API boundaries; strict TS typing with zero dependencies. |
 
 *(Note: Next 15.5.26 + React 19.3.0 adopted 29 Sep via protocol run; RCE-class CVEs cleared, resolving the prior Next 14 vulnerability).*
