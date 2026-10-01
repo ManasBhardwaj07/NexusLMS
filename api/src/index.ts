@@ -1,15 +1,27 @@
 import * as Sentry from '@sentry/node';
 import express from 'express';
+import helmet from 'helmet';
+import cors from 'cors';
 
 const app = express();
 const port = process.env.PORT || 3001;
-
-app.use(express.json());
 
 Sentry.init({
   dsn: process.env.SENTRY_DSN_API,
   environment: process.env.NODE_ENV,
 });
+
+// req.ip correctness for rate-limiter keying and DPDP ipAddress evidence behind reverse proxy
+app.set('trust proxy', 1);
+
+app.use(helmet());
+app.use(
+  cors({
+    origin: process.env.CORS_ORIGIN?.split(',') ?? ['http://localhost:3000'],
+    credentials: true,
+  })
+);
+app.use(express.json({ limit: '100kb' }));
 
 import healthRouter from './modules/health/routes.js';
 import consentRouter from './modules/consent/routes.js';
@@ -23,6 +35,8 @@ app.use('/api/v1/consent', consentRouter);
 app.get('/api/v1/me', authenticateSession, requireConsent, (req, res) => {
   res.status(200).json({ ok: true, data: req.user });
 });
+
+Sentry.setupExpressErrorHandler(app);
 
 app.listen(port, () => {
   console.log(`API server listening on port ${port}`);

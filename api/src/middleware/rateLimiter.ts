@@ -1,3 +1,4 @@
+import crypto from 'node:crypto';
 import { Request, Response, NextFunction } from 'express';
 import { getRedisClient } from '@codeascend/auth';
 
@@ -20,11 +21,11 @@ export function rateLimiter(limit: number, windowSeconds: number, keyPrefix: str
       const windowMs = windowSeconds * 1000;
       const clearBefore = now - windowMs;
 
-      // Sliding window using Redis sorted set (ZSET)
+      // ZSET member uniqueness must not rely on PRNG collision odds
       try {
         const pipeline = redis.pipeline();
         pipeline.zremrangebyscore(key, 0, clearBefore);
-        pipeline.zadd(key, { score: now, member: `${now}:${Math.random().toString(36).slice(2, 8)}` });
+        pipeline.zadd(key, { score: now, member: `${now}:${crypto.randomUUID()}` });
         pipeline.zcard(key);
         pipeline.expire(key, windowSeconds);
 

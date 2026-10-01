@@ -37,5 +37,8 @@ This document is the **single source of truth** for the toolchain. To verify thi
 | **@upstash/redis** | ^1.39.0 | SAFE-NEAR-TERM | Serverless REST/HTTP Redis client for token revocation (`tv:{uid}`), metadata cache, and rate limiting. |
 | **vitest** | 5.0.2 | SAFE-NEAR-TERM | Fast unit test runner; pinned exact tooling dep; Node engine requirement `^24.0.0` satisfied by Node 24.12.0. |
 | **zod** | ^3.24.2 | SAFE-NEAR-TERM | Schema validation at API boundaries; strict TS typing with zero dependencies. |
+| **helmet** | ^8.0.0 (8.3.0) | SAFE-NEAR-TERM | Security HTTP headers middleware for API layer; built-in types. |
+| **cors** | ^2.8.5 (2.8.6) | SAFE-NEAR-TERM | Cross-origin resource sharing middleware with env-driven allowlist. |
+| **@types/cors** | 2.8.19 | SAFE-NEAR-TERM | Pinned exact tooling/type definitions matching cors 2.8.6 in api workspace. |
 
 *(Note: Next 15.5.26 + React 19.3.0 adopted 29 Sep via protocol run; RCE-class CVEs cleared, resolving the prior Next 14 vulnerability).*

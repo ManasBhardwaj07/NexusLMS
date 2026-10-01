@@ -1,5 +1,5 @@
 import crypto from 'node:crypto';
-import { ConsentMethod } from '@prisma/client';
+import { ConsentMethod, ConsentState } from '@prisma/client';
 import { getRedisClient, invalidateUserMeta } from '@codeascend/auth';
 import { prisma } from '../../lib/prisma.js';
 
@@ -19,7 +19,7 @@ export type VerifyConsentResult =
   | { success: false; reason: 'CONSENT_TOKEN_INVALID' };
 
 export interface ConsentStatusResult {
-  consentState: string;
+  consentState: ConsentState;
   verifiedAt?: Date | null;
   method?: ConsentMethod | null;
 }

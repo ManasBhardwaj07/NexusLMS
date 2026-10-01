@@ -36,6 +36,7 @@ replay/single-use), minor-gating middleware matrix (PENDING vs VERIFIED × learn
 ## 9. Never-do list — v1.0 (9 items) + **[NEW] never accept isMinor/consentState from clients (server-derived only);
 never fire analytics outside track(); never store parent verification tokens unhashed-at-rest beyond their 48h life
 (tokens hashed in DB, plaintext only in the emailed link); never append to files with `echo >>` on Windows (writes UTF-16 with null bytes; edit files with the editor, not shell redirection)**
+*Consent verify tokens in email URLs (P2-6): accepted for MVP — single-use + 48h + 64-hex opaque, no PII in token. v2 trigger: move to fragment/POST flow if penetration review flags it.*
 ## 10. Scope freeze & change control — v1.0 verbatim (3 legitimate breaks; v2 backlog default; 24h written impact replies)
 
 ## 11. Living Rules Protocol [NEW]
@@ -58,6 +59,7 @@ Rules must grow with every feature, or they die.
 - **The Pre-Push Ritual:** `pnpm gate` must be green and its output pasted before ANY push is proposed. "It worked locally" without gate output is not evidence.
 - **Toolchain Delta Gate Scope:** `toolchain-delta` inspects committed diffs only; uncommitted edits are caught by the Pre-Push Ritual discipline.
 - **Prisma/CLI commands:** run only via pinned workspace binaries (`pnpm prisma …`), never unpinned `npx`.
+- **Zero-Data-Loss Column Type Changes:** Prisma diffs type changes as drop-and-recreate (DATA LOSS). Column type changes always go through --create-only + in-place USING cast, with SELECT DISTINCT verification first.
 ## 12. Phase 0–1 Configuration Baselines [NEW]
 These configuration decisions must be enforced as we build out the MVP to prevent rediscovering issues under load:
 1. **Database:** Neon `DATABASE_URL` must use the pooled (`-pooler`) endpoint starting from the first migration.

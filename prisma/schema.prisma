@@ -63,24 +63,30 @@ enum ConsentMethod {
   PHONE
 }
 
+enum ConsentState {
+  NOT_REQUIRED
+  PENDING
+  VERIFIED
+}
+
 model User {
-  id              String    @id @default(uuid())
+  id              String       @id @default(uuid())
   name            String?
-  email           String    @unique
+  email           String       @unique
   emailVerified   DateTime?
   passwordHash    String?
   phone           String?
-  role            Role      @default(STUDENT)
+  role            Role         @default(STUDENT)
   permissions     Json?
-  tokenVersion    Int       @default(0) // bump + DEL Redis key tv:{id} = global revoke
+  tokenVersion    Int          @default(0) // bump + DEL Redis key tv:{id} = global revoke
   // --- v2.0: DPDP minors ---
   dateOfBirth     DateTime? // REQUIRED at signup (enforced at API layer)
-  isMinor         Boolean   @default(false) // derived at DOB capture (<18); never flipped back by user
-  trackingConsent Boolean   @default(false) // GA4/funnel events only if true AND !isMinor
-  consentState    String    @default("NOT_REQUIRED") // NOT_REQUIRED | PENDING | VERIFIED
+  isMinor         Boolean      @default(false) // derived at DOB capture (<18); never flipped back by user
+  trackingConsent Boolean      @default(false) // GA4/funnel events only if true AND !isMinor
+  consentState    ConsentState @default(NOT_REQUIRED)
   consentAt       DateTime?
-  createdAt       DateTime  @default(now())
-  updatedAt       DateTime  @updatedAt
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
 
   accounts          Account[]
   coursesCreated    Course[]           @relation("CourseCreator")
@@ -101,7 +107,7 @@ model ParentalConsent {
   method         ConsentMethod
   parentEmail    String?
   parentPhone    String?
-  tokenHash      String        @unique // bcrypt hash of single-use token; plaintext only in emailed link (48h life)
+  tokenHash      String        @unique // SHA-256 hash of single-use token; plaintext only in emailed link (48h life)
   tokenExpiresAt DateTime
   verifiedAt     DateTime?
   ipAddress      String? // evidence

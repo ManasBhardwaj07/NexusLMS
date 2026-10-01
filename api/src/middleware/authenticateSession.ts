@@ -124,15 +124,9 @@ export async function authenticateSession(
         return;
       }
 
-      if (!isConsentState(dbUser.consentState)) {
-        console.error('[auth] Database consentState corruption:', dbUser.consentState);
-        res.status(503).json({ ok: false });
-        return;
-      }
-
       meta = {
         isMinor: dbUser.isMinor,
-        consentState: dbUser.consentState,
+        consentState: dbUser.consentState as ConsentState,
       };
 
       try {
@@ -142,6 +136,11 @@ export async function authenticateSession(
         res.status(503).json({ ok: false });
         return;
       }
+    }
+
+    if (!meta) {
+      res.status(500).json({ ok: false });
+      return;
     }
 
     // 5. Derive identity once per request and attach to Express context
@@ -160,6 +159,3 @@ export async function authenticateSession(
   }
 }
 
-function isConsentState(v: unknown): v is ConsentState {
-  return v === 'NOT_REQUIRED' || v === 'PENDING' || v === 'VERIFIED';
-}
