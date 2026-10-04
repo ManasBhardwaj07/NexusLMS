@@ -7,6 +7,9 @@ import bcrypt from 'bcrypt';
 import { Redis } from '@upstash/redis';
 import { Ratelimit } from '@upstash/ratelimit';
 
+// Precomputed cost-12 bcrypt hash to equalize timing when user/passwordHash is missing (timing oracle mitigation).
+export const DUMMY_HASH = '$2b$12$Vj055DJd5MtHBKpCBoLFHOAF6xZigU6QlzEdRo0g9qz22pY4Q11GO';
+
 const prisma = new PrismaClient();
 
 // Rate limiting: 5 requests per minute, sliding window
@@ -15,6 +18,44 @@ const ratelimit = new Ratelimit({
   limiter: Ratelimit.slidingWindow(5, '1 m'),
   analytics: true,
 });
+
+export async function verifyUserCredentials(
+  email: unknown,
+  password: unknown,
+  ip: string = '127.0.0.1',
+  deps = {
+    findUser: (e: string) => prisma.user.findUnique({ where: { email: e } }),
+    limit: (key: string) => ratelimit.limit(key),
+    compare: bcrypt.compare,
+    dummyHash: DUMMY_HASH,
+  }
+) {
+  if (!email || !password) return null;
+  const key = `${email}:${ip}`;
+
+  try {
+    const { success } = await deps.limit(key);
+    if (!success) return null;
+  } catch (error) {
+    // FAIL-CLOSED on Redis error (deny, never allow)
+    console.error('Rate limit error:', error);
+    return null;
+  }
+
+  const user = await deps.findUser(email.toString().toLowerCase());
+
+  if (!user || !user.passwordHash) {
+    // Timing oracle mitigation: perform dummy compare to match password-hash execution time
+    await deps.compare(password.toString(), deps.dummyHash);
+    return null;
+  }
+
+  const isValid = await deps.compare(password.toString(), user.passwordHash);
+
+  if (!isValid) return null;
+
+  return user;
+}
 
 export const { handlers, auth, signIn, signOut } = NextAuth({
   adapter: PrismaAdapter(prisma),
@@ -31,32 +72,8 @@ export const { handlers, auth, signIn, signOut } = NextAuth({
         password: { type: 'password' }
       },
       async authorize(credentials, req) {
-        if (!credentials?.email || !credentials?.password) return null;
-        
-        // Extract IP from headers or fallback
         const ip = req?.headers?.get('x-forwarded-for') ?? '127.0.0.1';
-        const key = `${credentials.email}:${ip}`;
-
-        try {
-          const { success } = await ratelimit.limit(key);
-          if (!success) return null;
-        } catch (error) {
-          // FAIL-CLOSED on Redis error (deny, never allow)
-          console.error('Rate limit error:', error);
-          return null;
-        }
-
-        const user = await prisma.user.findUnique({
-          where: { email: credentials.email.toString().toLowerCase() }
-        });
-        
-        if (!user || !user.passwordHash) return null;
-        
-        const isValid = await bcrypt.compare(credentials.password.toString(), user.passwordHash);
-        
-        if (!isValid) return null;
-        
-        return user;
+        return verifyUserCredentials(credentials?.email, credentials?.password, ip);
       }
     })
   ],

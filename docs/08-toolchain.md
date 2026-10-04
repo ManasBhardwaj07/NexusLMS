@@ -40,5 +40,6 @@ This document is the **single source of truth** for the toolchain. To verify thi
 | **helmet** | ^8.0.0 (8.3.0) | SAFE-NEAR-TERM | Security HTTP headers middleware for API layer; built-in types. |
 | **cors** | ^2.8.5 (2.8.6) | SAFE-NEAR-TERM | Cross-origin resource sharing middleware with env-driven allowlist. |
 | **@types/cors** | 2.8.19 | SAFE-NEAR-TERM | Pinned exact tooling/type definitions matching cors 2.8.6 in api workspace. |
+| **PostHog** | REST capture (no npm dep) | SAFE-NEAR-TERM | Product analytics via HTTPS REST endpoint; env: `POSTHOG_KEY`, `POSTHOG_HOST` (EU cloud: `https://eu.i.posthog.com`, matching Sentry data-region policy). Gated for minors/non-consented users. Strict boundary PII denylist. |
 
 *(Note: Next 15.5.26 + React 19.3.0 adopted 29 Sep via protocol run; RCE-class CVEs cleared, resolving the prior Next 14 vulnerability).*

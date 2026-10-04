@@ -7,5 +7,7 @@ export const authRouter = Router();
 export const meRouter = Router();
 
 authRouter.post('/register', rateLimiter(5, 60, 'auth-register'), authController.register);
+authRouter.post('/logout-all', authenticateSession, authController.logoutAll);
 
 meRouter.post('/dob', authenticateSession, authController.updateDob);
+

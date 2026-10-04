@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense, useState, FormEvent } from 'react';
-import { signIn } from 'next-auth/react';
+import { signIn, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 
@@ -97,6 +97,28 @@ function LoginForm() {
         >
           {loading ? 'Signing in…' : 'Sign in'}
         </button>
+
+        <div className="pt-1 text-center">
+          <button
+            id="login-logout-all"
+            type="button"
+            disabled={loading}
+            onClick={async () => {
+              setLoading(true);
+              try {
+                await fetch('/api/v1/auth/logout-all', { method: 'POST' });
+              } catch {
+                // Ignore network errors on logout
+              }
+              await signOut({ redirect: false });
+              setLoading(false);
+              setInlineError('All active sessions have been revoked. Please sign in again.');
+            }}
+            className="text-xs text-muted-foreground hover:text-foreground underline transition"
+          >
+            Revoke all sessions (Log out all devices)
+          </button>
+        </div>
       </form>
     </>
   );

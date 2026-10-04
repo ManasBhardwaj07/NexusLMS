@@ -5,7 +5,7 @@ import { authService } from './service.js';
 const registerSchema = z.object({
   name: z.string().optional(),
   email: z.string().email().transform(val => val.toLowerCase()),
-  password: z.string().min(8),
+  password: z.string().min(8).max(72),
   dateOfBirth: z.string().datetime().refine((val) => new Date(val) <= new Date(), { message: 'dateOfBirth cannot be in the future' }),
   trackingConsent: z.boolean()
 });
@@ -42,7 +42,11 @@ export const authController = {
       }
       
       res.status(200).json({ ok: true });
-    } catch (err) {
+    } catch (err: unknown) {
+      if (typeof err === 'object' && err !== null && 'code' in err && (err as { code: string }).code === 'P2002') {
+        res.status(409).json({ ok: false, error: { code: 'EMAIL_EXISTS' } });
+        return;
+      }
       console.error('[auth] register error:', err);
       // Commandment 14: fail-closed everywhere, uniform {ok: false}
       res.status(500).json({ ok: false });
@@ -76,6 +80,21 @@ export const authController = {
       res.status(200).json({ ok: true });
     } catch (err) {
       console.error('[auth] updateDob error:', err);
+      res.status(500).json({ ok: false });
+    }
+  },
+
+  async logoutAll(req: Request, res: Response): Promise<void> {
+    try {
+      if (!req.user || !req.user.uid) {
+        res.status(401).json({ ok: false, error: { code: 'UNAUTHORIZED' } });
+        return;
+      }
+
+      await authService.logoutAll(req.user.uid);
+      res.status(200).json({ ok: true });
+    } catch (err) {
+      console.error('[auth] logoutAll error:', err);
       res.status(500).json({ ok: false });
     }
   }

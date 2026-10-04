@@ -73,6 +73,7 @@ These configuration decisions must be enforced as we build out the MVP to preven
 9. **Schema & Migration Pre-flight:** Before executing migrations, validate the schema with `npx prisma validate` and `npx prisma format`. Raw SQL migrations must strictly adhere to the Minimalist Commenting Rule (§3: comment only non-obvious business invariants, never comment what the SQL syntax does).
 10. **Config & Env Integrity:** `.env` and `.env.*` files must be verified for syntax (balanced quotes, valid connection strings) before executing commands that load them.
 11. **Clean-Room Type Isolation Law:** Type resolution (`@types/`) is strictly quarantined per workspace using `typeRoots`. Workspaces must explicitly declare and install their own types. The global environment must never leak types into CI or build processes. Enforced by `pnpm cleanroom` gate (`tsc --listFiles`). *v1 scans @types roots only; module-resolution leaks (e.g. buffer) are a known accepted gap; trigger: revisit if CI ever diverges again.*
+12. **Analytics Provider:** analytics provider = PostHog (EU), locked; GA4 deferred to v1.1 revisit. Zero PII: events carry anonymous identifiers only and are strictly gated for minors and non-consented users.
 
 ## 13. Env & Secrets Conventions [NEW]
 - **Single Source of Truth:** `.env` is the ONLY home for secrets and environment-specific values.

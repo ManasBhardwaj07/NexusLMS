@@ -12,7 +12,6 @@
  */
 
 export type TrackingUser = {
-  uid: string;
   isMinor: boolean;
   consentState: 'NOT_REQUIRED' | 'PENDING' | 'VERIFIED';
 };
@@ -25,6 +24,43 @@ export type TrackingEvent =
   | 'page_viewed';
 
 export type TrackingProperties = Record<string, string | number | boolean | null>;
+
+/**
+ * PII Denylist: keys that must never reach analytics logs or providers.
+ * Case-insensitive comparison is performed at the boundary.
+ */
+const PII_KEYS = new Set([
+  'uid',
+  'userid',
+  'user_id',
+  'id',
+  'email',
+  'name',
+  'firstname',
+  'lastname',
+  'first_name',
+  'last_name',
+  'phone',
+  'phonenumber',
+  'phone_number',
+  'dob',
+  'dateofbirth',
+  'date_of_birth',
+  'parentemail',
+  'parent_email',
+  'token',
+]);
+
+function sanitizeProperties(properties?: TrackingProperties): TrackingProperties {
+  if (!properties) return {};
+  const clean: TrackingProperties = {};
+  for (const [key, val] of Object.entries(properties)) {
+    if (!PII_KEYS.has(key.toLowerCase())) {
+      clean[key] = val;
+    }
+  }
+  return clean;
+}
 
 /**
  * Fire an analytics event.
@@ -42,31 +78,35 @@ export function track(
     return 'gated';
   }
 
+  // ── BOUNDARY SANITIZATION ────────────────────────────────────────────────
+  // DPDP: strip identifying keys before logging or dispatching.
+  const safeProperties = sanitizeProperties(properties);
+
   // ── NOOP in development / test ────────────────────────────────────────────
   if (process.env.NODE_ENV !== 'production') {
-    // Log to console so developers can see events without sending to PostHog.
-    console.info(`[analytics:noop] ${event}`, { uid: user.uid, ...properties });
+    console.info(`[analytics:noop] ${event}`, safeProperties);
     return 'noop';
   }
 
   // ── FIRE (production only) ────────────────────────────────────────────────
   // Wrapped in try/catch so analytics errors never crash the calling page.
   try {
-    // PostHog capture via fetch — avoids importing the heavy Node.js SDK in
-    // the Next.js edge/RSC boundary. Swap for posthog-js in client components
-    // when the client-side bundle is wired up in Phase 2.
-    const POSTHOG_KEY = process.env.POSTHOG_API_KEY;
-    const POSTHOG_HOST = process.env.POSTHOG_HOST ?? 'https://app.posthog.com';
+    // PostHog capture via fetch — REST capture (no npm dep).
+    // Configured via POSTHOG_KEY. Default host is EU cloud.
+    const POSTHOG_KEY = process.env.POSTHOG_KEY;
+    const POSTHOG_HOST = process.env.POSTHOG_HOST ?? 'https://eu.i.posthog.com';
 
     if (POSTHOG_KEY) {
+      // DPDP: Payload is strictly anonymous. distinct_id is fixed to 'anonymous',
+      // and properties contain zero PII (no email, uid, or user-identifying data).
       fetch(`${POSTHOG_HOST}/capture/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           api_key: POSTHOG_KEY,
           event,
-          distinct_id: user.uid,
-          properties: { ...properties, $lib: 'codeascend-analytics/1.0' },
+          distinct_id: 'anonymous',
+          properties: { ...safeProperties, $lib: 'codeascend-analytics/1.0' },
         }),
       }).catch(() => {
         // Fire-and-forget; ignore network errors silently in production.
@@ -78,3 +118,5 @@ export function track(
 
   return 'fired';
 }
+
+

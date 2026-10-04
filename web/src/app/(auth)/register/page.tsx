@@ -60,7 +60,7 @@ export default function RegisterPage() {
       // We use age-based isMinor determination for the analytics user object
       const isMinor = age < 18;
       track(
-        { uid: data.id ?? email, isMinor, consentState: isMinor ? 'PENDING' : 'NOT_REQUIRED' },
+        { isMinor, consentState: isMinor ? 'PENDING' : 'NOT_REQUIRED' },
         'user_registered',
         { method: 'credentials' },
       );
