@@ -25,11 +25,14 @@ app.use(express.json({ limit: '100kb' }));
 
 import healthRouter from './modules/health/routes.js';
 import consentRouter from './modules/consent/routes.js';
+import { authRouter, meRouter } from './modules/auth/routes.js';
 import { authenticateSession } from './middleware/authenticateSession.js';
 import { requireConsent } from './middleware/requireConsent.js';
 
 app.use('/api/v1', healthRouter);
 app.use('/api/v1/consent', consentRouter);
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/me', meRouter);
 
 // GET /api/v1/me: returns authenticated user context (gated for minors requiring parental consent)
 app.get('/api/v1/me', authenticateSession, requireConsent, (req, res) => {

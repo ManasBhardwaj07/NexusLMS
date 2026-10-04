@@ -22,6 +22,7 @@ export interface ConsentStatusResult {
   consentState: ConsentState;
   verifiedAt?: Date | null;
   method?: ConsentMethod | null;
+  dateOfBirth?: Date | null;
 }
 
 export const consentService = {
@@ -206,6 +207,7 @@ export const consentService = {
       where: { id: userId },
       select: {
         consentState: true,
+        dateOfBirth: true,
         parentalConsent: {
           select: {
             verifiedAt: true,
@@ -223,6 +225,7 @@ export const consentService = {
       consentState: user.consentState,
       verifiedAt: user.parentalConsent?.verifiedAt ?? null,
       method: user.parentalConsent?.method ?? null,
+      dateOfBirth: user.dateOfBirth,
     };
   },
 };

@@ -1,0 +1,5 @@
+// tsc emits .js/.d.ts alongside .ts when outDir is not set; ignore them.
+// This package is consumed via transpilePackages in web/next.config.mjs —
+// no build step is needed; committed source is always the .ts files only.
+src/*.js
+src/*.d.ts

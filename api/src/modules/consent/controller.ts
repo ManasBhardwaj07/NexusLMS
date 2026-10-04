@@ -138,6 +138,7 @@ export const consentController = {
       res.status(200).json({
         ok: true,
         consentState: statusData.consentState,
+        dateOfBirth: statusData.dateOfBirth ? statusData.dateOfBirth.toISOString() : null,
         ...(statusData.consentState === 'VERIFIED' && statusData.verifiedAt
           ? { verifiedAt: statusData.verifiedAt }
           : {}),

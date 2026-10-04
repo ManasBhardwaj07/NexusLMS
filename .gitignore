@@ -26,6 +26,7 @@ coverage/
 pino-logs/
 
 # misc
+scratch/
 tmp/
 .vercel
 .turbo

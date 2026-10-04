@@ -6,7 +6,7 @@
     "build": "pnpm --filter web build",
     "lint": "pnpm -r lint",
     "typecheck": "pnpm -r --parallel typecheck",
-    "test": "vitest run --passWithNoTests",
+    "test": "vitest run",
     "boundaries": "depcruise web api packages",
     "toolchain-delta": "node scripts/check-toolchain-delta.js",
     "cleanroom": "node scripts/check-cleanroom.js",

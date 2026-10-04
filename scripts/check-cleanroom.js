@@ -3,14 +3,15 @@ const path = require('path');
 const os = require('os');
 
 const rootDir = process.cwd();
-const projects = ['api', 'web', 'packages/auth'];
+const projects = ['api', 'web', 'packages/auth', 'packages/analytics'];
 let failed = false;
 
 for (const project of projects) {
   try {
-    // We use tsc --listFiles to ask the compiler exactly which files it loaded, 
+    // We use tsc --noEmit --listFiles to ask the compiler exactly which files it loaded,
     // ensuring no host environment leakage bypasses our configuration.
-    const output = execSync(`pnpm --filter ${project} exec tsc --listFiles`, { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'ignore'] });
+    // --noEmit prevents accidental JS/d.ts artifact emission into src/ when outDir is unset.
+    const output = execSync(`pnpm --filter ${project} exec tsc --noEmit --listFiles`, { encoding: 'utf-8', stdio: ['pipe', 'pipe', 'ignore'] });
     const files = output.split(/\r?\n/).filter(Boolean);
     
     for (const file of files) {
