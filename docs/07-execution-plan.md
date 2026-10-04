@@ -59,3 +59,15 @@ Cadence/gates/escalation/freeze/risk register: v1.0 §2–§6 verbatim (unchange
 **1 Oct 2026:**
 - API auth layer complete (Commits C-0 to C-5): Full authentication spine operational with cryptographic JWE session verification, Upstash Redis ZSET sliding-window rate limiting, DPDP §9 verifiable parental consent module (token lifecycle, single-use transactional verification, real-time cache unlock), and live curl transcripts across 401/403/200/429 scenarios.
 - C-5 falsified Commit B's JWE validation via live evidence (RFC 7516 §7.1) — transcripts proved what typecheck asserted.
+
+**4 Oct 2026:**
+- Auth spike audit-fix & final polish branches complete (Fixes 1–8):
+  - Fix 1: Parent consent verification page live (`web/src/app/consent/verify/page.tsx`), completing the final DPDP §9 loop with transactional unlock.
+  - Fix 2: PostHog analytics ratified in EU cloud (`packages/analytics`), boundary-level PII stripping, non-identifying telemetry only, zero data collection for minors. E's re-audit gap found and fixed.
+  - Fix 3: P2 quartet closed — timing oracle eliminated via constant-time dummy bcrypt compare (cost 12), bcrypt 72-byte max guard in Zod, P2002 parallel registration race mapped to 409 EMAIL_EXISTS, calendar age math pinned to boundary conditions.
+  - Fix 4: `POST /api/v1/auth/logout-all` endpoint deployed with extracted-token revocation proof and global Redis cache eviction; integrated into login UI.
+  - Fix 5: "Continue with Google" sign-up button mirrored onto `/register` with full C6 `/auth/complete-profile` routing verified.
+  - Fix 6: Date of birth selector refactored from browser date-picker into compact 3-dropdown selector (DD/MM/YYYY) with `bday-*` autocomplete attributes and UTC midnight ISO composition.
+  - Fix 7 & 8: Local environment PostHog keys completed; signup architecture decision recorded in docs/06 §12 (progressive profiling rejected in favor of strict DPDP §9 compliance).
+- AUTH SPIKE CLOSED — one caveat: Google full-flow pending human verification with founder's account.
+
