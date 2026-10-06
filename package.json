@@ -10,7 +10,7 @@
     "boundaries": "depcruise web api packages",
     "toolchain-delta": "node scripts/check-toolchain-delta.js",
     "cleanroom": "node scripts/check-cleanroom.js",
-    "gate": "sh scripts/check-file-placement.sh && pnpm cleanroom && pnpm toolchain-delta && node scripts/check-docs.mjs && pnpm lint && pnpm typecheck && pnpm test && pnpm boundaries && pnpm build",
+    "gate": "sh scripts/check-file-placement.sh && pnpm cleanroom && pnpm toolchain-delta && node scripts/check-docs.mjs && node scripts/check-prisma-singleton.js && pnpm lint && pnpm typecheck && pnpm test && pnpm boundaries && pnpm build",
     "postinstall": "prisma generate"
   },
   "packageManager": "pnpm@9.15.9",

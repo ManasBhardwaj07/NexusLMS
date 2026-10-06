@@ -60,6 +60,7 @@ Rules must grow with every feature, or they die.
 - **Toolchain Delta Gate Scope:** `toolchain-delta` inspects committed diffs only; uncommitted edits are caught by the Pre-Push Ritual discipline.
 - **Prisma/CLI commands:** run only via pinned workspace binaries (`pnpm prisma …`), never unpinned `npx`.
 - **Zero-Data-Loss Column Type Changes:** Prisma diffs type changes as drop-and-recreate (DATA LOSS). Column type changes always go through --create-only + in-place USING cast, with SELECT DISTINCT verification first.
+- **PrismaClient Instantiation:** PrismaClient instantiation lives ONLY in `lib/prisma.ts` (globalThis singleton) — the 10-Clients HMR/exhaustion gotcha; gate-enforced.
 ## 12. Phase 0–1 Configuration Baselines [NEW]
 These configuration decisions must be enforced as we build out the MVP to prevent rediscovering issues under load:
 1. **Database:** Neon `DATABASE_URL` must use the pooled (`-pooler`) endpoint starting from the first migration.

@@ -2,15 +2,13 @@ import NextAuth from 'next-auth';
 import Google from 'next-auth/providers/google';
 import Credentials from 'next-auth/providers/credentials';
 import { PrismaAdapter } from '@auth/prisma-adapter';
-import { PrismaClient } from '@prisma/client';
+import { prisma } from './lib/prisma';
 import bcrypt from 'bcrypt';
 import { Redis } from '@upstash/redis';
 import { Ratelimit } from '@upstash/ratelimit';
 
 // Precomputed cost-12 bcrypt hash to equalize timing when user/passwordHash is missing (timing oracle mitigation).
 export const DUMMY_HASH = '$2b$12$Vj055DJd5MtHBKpCBoLFHOAF6xZigU6QlzEdRo0g9qz22pY4Q11GO';
-
-const prisma = new PrismaClient();
 
 // Rate limiting: 5 requests per minute, sliding window
 const ratelimit = new Ratelimit({
