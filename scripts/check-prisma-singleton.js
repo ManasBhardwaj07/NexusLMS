@@ -9,6 +9,7 @@ try {
   const violations = lines.filter(line =>
     !line.includes('lib/prisma.ts') &&
     !line.startsWith('prisma/seed.ts') &&
+    !line.startsWith('scripts/check-prisma-singleton.js') &&
     line.trim().length > 0
   );
 
