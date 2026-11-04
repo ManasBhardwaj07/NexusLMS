@@ -11,7 +11,7 @@
   },
   "dependencies": {
     "@codeascend/auth": "workspace:*",
-    "@prisma/client": "5.22.0",
+    "@prisma/client": "7.10.1",
     "@sentry/node": "^11.0.0",
     "@upstash/redis": "^1.39.0",
     "bcrypt": "^6.0.0",
